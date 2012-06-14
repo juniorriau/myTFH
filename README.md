@@ -12,9 +12,7 @@ whitelisting, RSA public key encryption and more...
 * PDO stored procedures for all DB transactions
 
 #Installation
-Use the [guide](INSTALL.md)
-
-
+Use the installation [guide](https://github.com/jas-/myTFH/INSTALL.md)
 
 #Implementation
 To implement this service within an application simply copy the /auth.php file
