@@ -6,7 +6,7 @@ whitelisting, RSA public key encryption and more...
 * RSA Public key authentication
 * RSA Public keyring helping isolate user accounts
 * XMLHttpRequest proxy using JSON formatted responses
-* Blacklist ACL per host
+* Blacklist ACL per host (Refering hosts are auto added to this list upon several factors)
 * Whitelist ACL per application
 * Simple implementation
 * PDO stored procedures for all DB transactions
