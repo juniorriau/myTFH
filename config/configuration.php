@@ -6,16 +6,16 @@ if (!defined('__SITE')) exit('No direct calls please...');
 /* Database configuration settings */
 $settings['db']['engine']     = 'mysql';
 $settings['db']['hostname']   = 'localhost';
-$settings['db']['username']   = 'licensing';
-$settings['db']['password']   = 'd3v3l0pm3n+';
-$settings['db']['database']   = 'licensing';
+$settings['db']['username']   = '';
+$settings['db']['password']   = '';
+$settings['db']['database']   = '';
 
 /* Application specific settings */
-$settings['opts']['title']    = 'Marriott Library - Software Licensing';
+$settings['opts']['title']    = 'myTFH - My tin foil hat (An SSO solution)';
 $settings['opts']['timeout']  = 3600;
 $settings['opts']['template'] = 'views/default';
 $settings['opts']['caching']  = 'views/cache';
-$settings['opts']['flogin']   = 99999999999999999999999;
+$settings['opts']['flogin']   = 15;
 
 /* Session specific settings */
 $settings['sessions']['timeout'] = $settings['opts']['timeout'];
@@ -36,6 +36,6 @@ $settings['sessions']['proto']   = true;
  * database contents. If you change this manually you will
  * loose everything in the database. You have been warned.
  */
-$settings['sessions']['db-key']   = '*1lPM-bgC0L(%=ofR=eY%%M[J_)jV-aA(xa!HOS}J,*gzi}nOGqY4^Ihqy*=k+^(t|ZdFO(l6iq]U|y-@tb<HRzmfeR6Ri{HcsSMW)jUpJ`@\P{`3Z-uh=[p<~hn4x[Z';
+$settings['sessions']['db-key']   = '';
 
 ?>
