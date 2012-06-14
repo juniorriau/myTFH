@@ -7,7 +7,7 @@ $sso = 'http://sso.dev/?nxs=proxy/remote';
 /**
  * @var $uid string Unique CSRF token
  */
-$uid = uuid();
+$uid = _uuid();
 
 /**
  * @var $proto string Set the connection protocol
@@ -39,7 +39,11 @@ $opt = array('Origin: '.$referer,
 			 'Client-IP: '._getRealIPv4(),
 			 'Content-MD5: '.base64_encode(md5($uid)));
 
+/* Perform page generation from SSO service */
 _do($sso, $uid, $opt, $referer);
+
+/* Register authentication token if it exists */
+_register($token);
 
 /**
  * @function _do
@@ -62,10 +66,24 @@ function _do($sso, $uid, $opt, $referer)
 }
 
 /**
+ * @function _register
+ * @abstract Register authentication token if present
+ */
+function _register($token)
+{
+	session_start();
+	if (!empty($token)) {
+		$_SESSION['token'] = $token;
+	}
+	session_regenerate_id(true);
+	return;
+}
+
+/**
  * @function _uuid
  * @abstract Generates a random GUID
  */
-function uuid()
+function _uuid()
 {
 	return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x', mt_rand(0, 0xffff),
 					mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0x0fff) | 0x4000,
@@ -96,22 +114,6 @@ function _getRealIPv4()
 	if ((getenv('HTTP_X_FORWARDED_SERVER')) && ($this->_ip(getenv('HTTP_X_FORWARDED_SERVER')))) return getenv('HTTP_X_FORWARDED_SERVER');
 	if ((getenv('HTTP_X_CLUSTER_CLIENT_IP')) && ($this->_ip(getenv('HTTP_X_CLUSTER_CLIENT_IP')))) return getenv('HTTP_X_CLUSTER_CLIENT_IP');
 	return getenv('REMOTE_ADDR');
-
-/*
-	return (getenv('HTTP_CLIENT_IP') && $this->_ip(getenv('HTTP_CLIENT_IP'))) ?
-				getenv('HTTP_CLIENT_IP') :
-				(getenv('HTTP_X_FORWARDED_FOR') && $this->_forwarded(getenv('HTTP_X_FORWARDED_FOR'))) ?
-					$this->_forwarded(getenv('HTTP_X_FORWARDED_FOR')) :
-					(getenv('HTTP_X_FORWARDED') && $this->_ip(getenv('HTTP_X_FORWARDED'))) ?
-						getenv('HTTP_X_FORWARDED') :
-						(getenv('HTTP_X_FORWARDED_HOST') && $this->_ip(getenv('HTTP_FORWARDED_HOST'))) ?
-							getenv('HTTP_X_FORWARDED_HOST') :
-							(getenv('HTTP_X_FORWARDED_SERVER') && $this->_ip(getenv('HTTP_X_FORWARDED_SERVER'))) ?
-								getenv('HTTP_X_FORWARDED_SERVER') :
-								(getenv('HTTP_X_CLUSTER_CLIENT_IP') && $this->_ip(getenv('HTTP_X_CLUSTER_CLIENT_IP'))) ?
-									getenv('HTTP_X_CLUSTER_CLIENT_IP') :
-									getenv('REMOTE_ADDR');
-*/
 }
 
 /**
