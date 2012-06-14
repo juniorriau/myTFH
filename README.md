@@ -11,6 +11,16 @@ whitelisting, RSA public key encryption and more...
 * Simple implementation
 * PDO stored procedures for all DB transactions
 
+#Implementation
+To implement this service within an application simply copy the /auth.php file
+to the remote application directory. Configure the first variable to point to
+your installation of the myTFH service then add the remote URL to the allowed
+applications whitelist.
+
+```php
+$sso = 'https://myTFH.service/?nxs=proxy/remote';
+```
+
 #Notes
 Refering applications using authentication must have their application added to
 the whitelist ACL and use PHP cURL functionality. If server configuration uses
