@@ -1,7 +1,7 @@
 DELIMITER //
 
 DROP PROCEDURE IF EXISTS Configuration_keys_add//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Configuration_keys_add(IN `countryName` VARCHAR(64), IN `stateOrProvinceName` VARCHAR(64), IN `localityName` VARCHAR(64), IN `organizationName` VARCHAR(64), IN `organizationalUnitName` VARCHAR(64), IN `commonName` VARCHAR(64), IN `emailAddy` VARCHAR(64), IN `privateKey` LONGTEXT, IN `publicKey` LONGTEXT, IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Configuration_keys_add(IN `countryName` VARCHAR(64), IN `stateOrProvinceName` VARCHAR(64), IN `localityName` VARCHAR(64), IN `organizationName` VARCHAR(64), IN `organizationalUnitName` VARCHAR(64), IN `commonName` VARCHAR(64), IN `emailAddy` VARCHAR(64), IN `privateKey` LONGTEXT, IN `publicKey` LONGTEXT, IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Add or updates users key pair'
@@ -18,7 +18,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Configuration_keys_get//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Configuration_keys_get(IN `emailAddy` VARCHAR(64), IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Configuration_keys_get(IN `emailAddy` VARCHAR(64), IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Retrieves OpenSSL keypair by email address'

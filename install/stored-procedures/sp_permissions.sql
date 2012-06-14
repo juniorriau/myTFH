@@ -1,7 +1,7 @@
 DELIMITER //
 
 DROP PROCEDURE IF EXISTS Perms_AddUpdate//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Perms_AddUpdate(IN `name` VARCHAR(128), IN `owner` VARCHAR(128), IN `grp` VARCHAR(128), IN `gr` INT(1), IN `gw` INT(1), IN `usr` VARCHAR(128), IN `ur` INT(1), IN `uw` INT(1), IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Perms_AddUpdate(IN `name` VARCHAR(128), IN `owner` VARCHAR(128), IN `grp` VARCHAR(128), IN `gr` INT(1), IN `gw` INT(1), IN `usr` VARCHAR(128), IN `ur` INT(1), IN `uw` INT(1), IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Add or updates resource object permissions'
@@ -31,7 +31,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Perms_DelAll//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Perms_DelAll(IN `name` VARCHAR(128))
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Perms_DelAll(IN `name` VARCHAR(128))
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Deletes ALL resource object permissions'
@@ -40,7 +40,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Perms_DelGroup//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Perms_DelGroup(IN `name` VARCHAR(128), IN `grp` VARCHAR(128), IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Perms_DelGroup(IN `name` VARCHAR(128), IN `grp` VARCHAR(128), IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Deletes resource object permissions for specified group'
@@ -49,7 +49,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Perms_DelUser//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Perms_DelUser(IN `name` VARCHAR(128), IN `usr` VARCHAR(128), IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Perms_DelUser(IN `name` VARCHAR(128), IN `usr` VARCHAR(128), IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Deletes resource object permissions for specified user'
@@ -58,7 +58,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Perms_SearchUser//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Perms_SearchUser(IN `name` VARCHAR(128), IN `usr` VARCHAR(128), IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Perms_SearchUser(IN `name` VARCHAR(128), IN `usr` VARCHAR(128), IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Finds read/write permissions per object per user'
@@ -67,7 +67,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Perms_SearchGroup//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Perms_SearchGroup(IN `name` VARCHAR(128), IN `grp` VARCHAR(128), IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Perms_SearchGroup(IN `name` VARCHAR(128), IN `grp` VARCHAR(128), IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Finds read/write permissions per object per group'

@@ -1,7 +1,7 @@
 DELIMITER //
 
 DROP PROCEDURE IF EXISTS Configuration_def_add//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Configuration_def_add(IN `title` VARCHAR(128), IN `templates` VARCHAR(255), IN `cache` VARCHAR(255), IN `flogin` INT(10), IN `private` INT(1), IN `email` VARCHAR(64), IN `timeout` INT(10), IN `pvkey` LONGTEXT, IN `pkey` LONGTEXT, IN `skey` LONGTEXT, IN `countryName` VARCHAR(64), IN `stateOrProvinceName` VARCHAR(64), IN `localityName` VARCHAR(64), IN `organizationName` VARCHAR(64), IN `organizationalUnitName` VARCHAR(64), `commonName` VARCHAR(64))
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Configuration_def_add(IN `title` VARCHAR(128), IN `templates` VARCHAR(255), IN `cache` VARCHAR(255), IN `flogin` INT(10), IN `private` INT(1), IN `email` VARCHAR(64), IN `timeout` INT(10), IN `pvkey` LONGTEXT, IN `pkey` LONGTEXT, IN `skey` LONGTEXT, IN `countryName` VARCHAR(64), IN `stateOrProvinceName` VARCHAR(64), IN `localityName` VARCHAR(64), IN `organizationName` VARCHAR(64), IN `organizationalUnitName` VARCHAR(64), `commonName` VARCHAR(64))
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Add or updates configuration'
@@ -10,7 +10,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Configuration_def_get//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Configuration_def_get(IN `challenge` LONGTEXT)
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Configuration_def_get(IN `challenge` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Retrieves configuration'
@@ -19,7 +19,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Configuration_def_keys//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Configuration_def_keys(IN `challenge` LONGTEXT)
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Configuration_def_keys(IN `challenge` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Retrieves currently configured keyring data'
@@ -28,7 +28,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Configuration_def_get_dn//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Configuration_def_get_dn()
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Configuration_def_get_dn()
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Retrieves OpenSSL DN configuration'

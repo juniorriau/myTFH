@@ -2,7 +2,7 @@ DELIMITER //
 
 -- Retrieve current session
 DROP PROCEDURE IF EXISTS Session_Search//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Session_Search(IN `session_id` VARCHAR(128), IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Session_Search(IN `session_id` VARCHAR(128), IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Retrieve current session'
@@ -11,7 +11,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Session_Add//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Session_Add(IN `session_id` VARCHAR(64), `session_data` LONGTEXT, `session_expire` INT(10), `session_agent` VARCHAR(64), `session_ip` VARCHAR(64), `session_referer` VARCHAR(64), IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Session_Add(IN `session_id` VARCHAR(64), `session_data` LONGTEXT, `session_expire` INT(10), `session_agent` VARCHAR(64), `session_ip` VARCHAR(64), `session_referer` VARCHAR(64), IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Add or update existing session id & data'
@@ -34,7 +34,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Session_Add//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Session_Add(IN `session_id` VARCHAR(64), `session_data` LONGTEXT, `session_expire` INT(10), `session_agent` VARCHAR(64), `session_ip` VARCHAR(64), `session_referer` VARCHAR(64), IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Session_Add(IN `session_id` VARCHAR(64), `session_data` LONGTEXT, `session_expire` INT(10), `session_agent` VARCHAR(64), `session_ip` VARCHAR(64), `session_referer` VARCHAR(64), IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Add or update existing session id & data'
@@ -43,7 +43,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Session_Destroy//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Session_Destroy(IN `session_id` VARCHAR(64))
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Session_Destroy(IN `session_id` VARCHAR(64))
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Delete users sessions id'
@@ -52,7 +52,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Session_Timeout//
-CREATE DEFINER='licensing'@'localhost' PROCEDURE Session_Timeout(IN `session_expire` INT(10))
+CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Session_Timeout(IN `session_expire` INT(10))
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Expire session based on timeout option'
