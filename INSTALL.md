@@ -48,3 +48,8 @@ And last but not least the dbHost attribute needs to be changed as well.
 ```sql
 sed -i 's/[dbHost]/hostname/g' install/stored-procedures/sql_*.sql
 ```
+
+#Configuration
+Next you will need to configure the application defaults. Once I have written
+an installer script all of this will be performed automagically but until then
+manual configuration is necessary.
