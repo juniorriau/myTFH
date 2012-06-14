@@ -1,0 +1,37 @@
+ROADMAP
+
+Description:
+Lightweight MVC PHP framework
+
+Features:
+ACL lists
+ - Supports defining access control lists by
+   IP; ranges, CIDR and individual addresses
+   supported
+
+PKI solution
+ - Uses per application/user certificates
+   for resource object permissions and sharing
+
+RSA public key
+ - Per application/user public key
+   authentication
+ 
+AES storage
+ - Transparent AES-CBC-256 encryption of
+   authenticated session data
+ - Transparent AES-CBC-256 encryption of
+   user/keyring and additional storage data
+ 
+3rd party API
+ - Additional applications may refer to this
+   application to handle per object permissions
+   and authentication data
+   
+PDO drivers
+ - Multiple driver support for MSSQL, MySQL,
+   SQLite, PGSQL & Oracle
+
+SP & SF support
+ - Utilizes stored functions and stored
+   procedures for all database transactions

@@ -1,0 +1,425 @@
+-- MySQL dump 10.13  Distrib 5.1.61, for redhat-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: licensing
+-- ------------------------------------------------------
+-- Server version	5.1.61
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `licensing`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `licensing` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `licensing`;
+
+--
+-- Table structure for table `authentication`
+--
+
+DROP TABLE IF EXISTS `authentication`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `authentication` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `resource` varchar(128) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `password` blob NOT NULL,
+  `level` varchar(40) NOT NULL,
+  `group` varchar(128) NOT NULL,
+  `authentication_token` longtext NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `resource` (`resource`),
+  KEY `email` (`email`),
+  KEY `group` (`group`),
+  KEY `level` (`level`),
+  CONSTRAINT `authentication_ibfk_1` FOREIGN KEY (`group`) REFERENCES `authentication_groups` (`group`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `authentication_ibfk_2` FOREIGN KEY (`level`) REFERENCES `authentication_levels` (`level`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `authentication`
+--
+
+LOCK TABLES `authentication` WRITE;
+/*!40000 ALTER TABLE `authentication` DISABLE KEYS */;
+/*!40000 ALTER TABLE `authentication` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `authentication_groups`
+--
+
+DROP TABLE IF EXISTS `authentication_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `authentication_groups` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `group` varchar(128) NOT NULL,
+  `manager` varchar(128) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `owner` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `group` (`group`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `authentication_groups`
+--
+
+LOCK TABLES `authentication_groups` WRITE;
+/*!40000 ALTER TABLE `authentication_groups` DISABLE KEYS */;
+INSERT INTO `authentication_groups` VALUES (1,'admin','','','admin');
+/*!40000 ALTER TABLE `authentication_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `authentication_levels`
+--
+
+DROP TABLE IF EXISTS `authentication_levels`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `authentication_levels` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `level` varchar(40) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `level` (`level`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `authentication_levels`
+--
+
+LOCK TABLES `authentication_levels` WRITE;
+/*!40000 ALTER TABLE `authentication_levels` DISABLE KEYS */;
+INSERT INTO `authentication_levels` VALUES (1,'admin'),(2,'user'),(3,'view');
+/*!40000 ALTER TABLE `authentication_levels` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `configuration`
+--
+
+DROP TABLE IF EXISTS `configuration`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `configuration` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `title` varchar(128) NOT NULL,
+  `templates` varchar(255) NOT NULL,
+  `cache` varchar(255) NOT NULL,
+  `private` tinyint(1) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `timeout` int(10) NOT NULL,
+  `privateKey` longtext NOT NULL,
+  `publicKey` longtext NOT NULL,
+  `sKey` longtext NOT NULL,
+  `countryName` varchar(64) NOT NULL,
+  `stateOrProvinceName` varchar(64) NOT NULL,
+  `localityName` varchar(64) NOT NULL,
+  `organizationName` varchar(64) NOT NULL,
+  `organizationalUnitName` varchar(64) NOT NULL,
+  `commonName` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `configuration`
+--
+
+LOCK TABLES `configuration` WRITE;
+/*!40000 ALTER TABLE `configuration` DISABLE KEYS */;
+INSERT INTO `configuration` VALUES (1,'Marriott Library - Software Licensing','views/default','views/cache',1,'licensing@utah.edu',3600,'4904192410406B5E9F67160694C83B6A91901C3FD677E55BC4B926ECF8EC499CAC26ADDE5F3807A9BB9646FF4650A8F04830A144FB82B1134C26DBDEBFA800ED2FAC6B08F0F8B4B7413AD8127BC81E57CAC730DB5F9F0D3373511604E7E7C9AF9B0F80DE1AFB0436350BB2D0D9E19283C0301093443065CBC9BFEA3373E36C3823C70EABF05C2A8BDDBA8E6341D4555CF7D632EDFAC7B1B1BE123B714412462CB3E6018F95CC9B83ED032E7ECF5F679237BE90F98568D785EBAD7C757C40331BD8EDBB640F7C354C9E036C8F957C3D0C94E3B4D45C9441993C7910268EC7132571559AF0D6A946742BABB449C317B9B2318F726AEE9F9BE5258739128D22C13560DB843FDB4CCAE056F81BD6EDEFD360FCA218BC68499716907E3CFF94D10E68F1F57189BCF1CC35B0C6A967C0594447A4F8898CE98D4C833A9204328B2D271AFC8BE09851F3E0BD59FCB97315AFDEC5224B4B7D06C8F7DA65D53FADE73F1E1C6B00380D23BE5BF45DFB15B965401EC387B3CE2EC7E5062B990B038C4AE1A3D093FACB9A732D30F8ED8E5729720A83A4C46203C41101DCDE46ABCC1051AE8C886073AF80834D04C2DC8FBFD2F00E8BE4DB113D9317D4353FAD5D32D400A63FC4F4F45EF13F692E15C2AA0FACA5E2FABDFF881E677CAF3116BC85067714F416047755CA5F624130B00DF381904C69D26258B6265A77862E412665012933901C5533D09D78E5538514BCF3BBDEB4AB0919266470F1F75077DFFB5B871813C362C893D8013926998411585D0BFFBCE810B29BB577BCC18CDE6106700B90F08FAFBB5CB05236B6F626B0FB40886A0CBED3500267BF458809FEF80492B166EBC1329D13FE62EEF3908563FB0F24026B18DA1EA083CB0FF59EB8589736F47B660E5FF1B182406A1251E45399830F7186C76B29972F354412C738B3D4D7B17048A8D5EBCD62A54EEC4F89C1934E52C83E6070DE8A694553627AA2990C37164F63EEB59C1D097EBCC4F3008F7F96F4908FDDDD1B5F118C216BCEF13D3EF19AD33783ADC8A82104474062074BF99AF5DEB3D8D936760F62BCCE11581B17E5521DB5574E486A1826ABDF9C9C01A69A9200EAD8B08CA56FB8769E880FF2763663E59482BD157E28A25A53C00257254667D98D43B6AFBD37421A87DE3B45DC957E2EF005F20B08FBDBFC6929AFC471BCAB95B54279F760440021D5251A6FFA8ACE5E9EB479D9B87D70EE4F6A92924A3E30721B02D334DE30110663CD93421D3247E024CB273C6B15BBBA4F111B566EC2A4167349F4247DE143C7738842E9ED0992E5B79AE5C5A253F678B695EDCCF7D02E9324B4D2DC2BAA6B958DC0EC81D7F6F356495B7CD43C04278400D6F49AF4CEC92C5549BCA0CF110F99E666ECD34E268B9C0F1D76BE2639A9B01CC388FC666562F312EC5665A4535122E05DDE633BFB80186F483A759B9C3CD14C36D8BBCD0E24DDC926B8EE52A08728CE5B41BB0CBB8907379A3B996D9E093C017AC7D7F28DEC359DE6B5223EE6A5E06D06523D4892007A36A4E41C1B8A09F22A47A46D81E557FB4FB8119B2A4BC897D79512F6D3ED365ED8607285FEA6D77BDFF6EE5954CD16FAAA5313CF95AA582AC6B2B62199A899BF552910F468A9BA35F0F6FA6150FCC7EE16A28158530685BBA7B0F02CBCB1DDAA14C36ADD175378ED231CF92430B50D5BC56DEE9A4581B5F06D3218227191788613871C0C959B849798902773B7AE6AF11AC90A3AE28BDDD5036518CEB0C52B25C60B6240CE823B6F616DB13CE13B90E6D59349DDA08BD46333F24AD906BCC8347824D05DA96749A74642D9CEC9DFEAC7C21CDB766F0571715FCC4D6F53622FC8287F8801DDDF76F31CC297CD6588C2AA8E9233EA31CD0EB9B6660DCB9F772C6567CFE071046E95C0B7782E2EF1958F59A5D675298B90FFADE1D4ADD0CEBCF1F718B3F46E59BB45BA32D0819E3BDC7D17A5012D95A69F38F8F0AC0CD27B3D989DE947F57971E5F54D08074FB04DF5E8433A433B89FD40E8E6EC1AD51FE496C664270C341BE4E263B5FD30F6B9BABA22C09BB9D48C8D4D0CA6C2A409817599D80B47375EF5B3E195A9D78D94CCFBE93C22544039D135413D0E71FF714728F33F5FC5BFB91FEDB8D0100301200A786A56B2E6A299136D8B3E336D3948EA99E1A6F73F7BD4E7DCC411FF6ACD1527B2E9B011C0EE86030106B8C230B3954DC484212D3306A0322120037B27BD8A187E6754FD5FDA9ABD838FDD0DFD3DDADA135C9ADC8179BCCD87528415A0262FED9EAC743859373437074299A00439B3036DCC31B3F6A860922282CE08E2B95205821B06862649616C68AFF5A433A26D019C86E44BB73462FA088378BD00005A44E1C01B080F0BEDD54AB63FF7AB59275F9F3E8E4E733E05B9EA065F68B2AA4979EA2C289A1BEFF1432DE46344C5A239AD88DD44C4F73D360490DB924FA470FF3F1CB8BFAA1A3264CAC2E868DEC04BF1D931B611ECDE3E9064283A1A1060EE9BA84258955D629EC18FEB2E013E929A917C02013F1D0443A7419F1C1ACBF22FF5D92562A4F11215F8986D2406BE3C816E049C03621AF69AC6D6292A36FF0E388399696CD95CB5F554B6','CCF8E882646CA157B8491456B4235C929596A063A4936594FF3A21AC658CF6971040092088332125DEB9A0AE73F6D5B60FF27F48AE088F3CFF900A4AC550EA71F92EDB58EA943089760C58D08C425EB3125FD258599CC70D43FF4CD9236CCDE590A9EF2CFB1E3775EBB6D49FFEB55E9D9C7D73FE37F638581B4864EEDC355009BC718DBA38444260DBB7F3084FB53FCD4975EF6015652383095B54EF15178AB6282BF7A1983D2094A94BC0FA1E8091EE86B00D163E348E0C241197CBEC43172E7562EB927F11607075E8A86124BBDCA32DB4FE67BA866E74D77EF64CB862FE63C12CB3360C016548331FB1B7A9A8B9B320E5C48FE025A25C8376C13AE3AC67DCF97DC0CE9C4001BA9DBDB149EFA9674BD30DF1754AA395DCC83763B4CF37FB8B5D8604653D2E2920B57119EE309A1C6D50C96AB26EB5C8B3563CEF76355D71D3D1F1337C13628EC26D233FDDB1777FEE6E7CB317687519579377410FB30B1760654A2F66640DED3ED46EEE71F474A574B75FD57558F395951915833C142CA1B699751C0FCDF448143E11CCF587A1ED34055F9D812E11FCA0E7EB7A8140EFDC6750BAF943506CEB4C9D770AE4F31DF07F28E93C2B41D958DB4E70E72D0F224C11B9852733BECB8A4CA6AA8B15DBD4ADD5','559A779608F5F3DE2EB331134060B034484C8A202D10C14BE86B4221028BD0A7A4DD888B93F67D8BC0A15E6DC95B8E7431BAAD1D7EE650819A10671949710C90','US','Utah','Salt Lake City','University Of Utah','Marriott Library','localhost:8080');
+/*!40000 ALTER TABLE `configuration` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `configuration_access`
+--
+
+DROP TABLE IF EXISTS `configuration_access`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `configuration_access` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `allow` varchar(30) NOT NULL,
+  `deny` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `configuration_access`
+--
+
+LOCK TABLES `configuration_access` WRITE;
+/*!40000 ALTER TABLE `configuration_access` DISABLE KEYS */;
+/*!40000 ALTER TABLE `configuration_access` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `configuration_openssl_cnf`
+--
+
+DROP TABLE IF EXISTS `configuration_openssl_cnf`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `configuration_openssl_cnf` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `config` varchar(64) NOT NULL,
+  `encrypt_key` tinyint(1) NOT NULL,
+  `private_key_type` varchar(64) NOT NULL,
+  `digest_algorithm` varchar(64) NOT NULL,
+  `private_key_bits` int(4) NOT NULL,
+  `x509_extensions` varchar(32) NOT NULL,
+  `encrypt_key_cipher` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `configuration_openssl_cnf`
+--
+
+LOCK TABLES `configuration_openssl_cnf` WRITE;
+/*!40000 ALTER TABLE `configuration_openssl_cnf` DISABLE KEYS */;
+INSERT INTO `configuration_openssl_cnf` VALUES (1,'config/openssl.cnf',1,'OPENSSL_KEYTYPE_RSA','sha1',2048,'usr_cert','OPENSSL_CIPHER_3DES');
+/*!40000 ALTER TABLE `configuration_openssl_cnf` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `configuration_openssl_keys`
+--
+
+DROP TABLE IF EXISTS `configuration_openssl_keys`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `configuration_openssl_keys` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `countryName` varchar(64) NOT NULL,
+  `stateOrProvinceName` varchar(64) NOT NULL,
+  `localityName` varchar(64) NOT NULL,
+  `organizationName` varchar(64) NOT NULL,
+  `organizationalUnitName` varchar(64) NOT NULL,
+  `commonName` varchar(64) NOT NULL,
+  `emailAddress` varchar(64) NOT NULL,
+  `privateKey` longtext NOT NULL,
+  `publicKey` longtext NOT NULL,
+  `sKey` longtext NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `emailAddress` (`emailAddress`),
+  CONSTRAINT `configuration_openssl_keys_ibfk_1` FOREIGN KEY (`emailAddress`) REFERENCES `authentication` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `configuration_openssl_keys`
+--
+
+LOCK TABLES `configuration_openssl_keys` WRITE;
+/*!40000 ALTER TABLE `configuration_openssl_keys` DISABLE KEYS */;
+/*!40000 ALTER TABLE `configuration_openssl_keys` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `license`
+--
+
+DROP TABLE IF EXISTS `license`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `license` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
+  `expiration` varchar(20) NOT NULL,
+  `amount` int(4) NOT NULL,
+  `price` decimal(20,2) NOT NULL,
+  `purchased` varchar(20) NOT NULL,
+  `type` char(5) NOT NULL,
+  `maintenance` int(1) NOT NULL,
+  `notes` longtext NOT NULL,
+  `serial` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `license`
+--
+
+LOCK TABLES `license` WRITE;
+/*!40000 ALTER TABLE `license` DISABLE KEYS */;
+/*!40000 ALTER TABLE `license` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `logs`
+--
+
+DROP TABLE IF EXISTS `logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `logs` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `guid` varchar(64) NOT NULL,
+  `adate` varchar(64) NOT NULL,
+  `ip` varchar(10) NOT NULL,
+  `hostname` varchar(80) NOT NULL,
+  `agent` varchar(128) NOT NULL,
+  `query` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `guid` (`guid`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logs`
+--
+
+LOCK TABLES `logs` WRITE;
+/*!40000 ALTER TABLE `logs` DISABLE KEYS */;
+INSERT INTO `logs` VALUES (1,'4081d9f5-4eeb-4430-a14d-e48c2d9a705d','1329357613','10.0.2.2','10.0.2.2','Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0',''),(2,'4bbbafd7-bf8b-439c-b5d9-bef5ac962a67','1330102191','10.0.2.2','10.0.2.2','Mozilla/5.0 (X11; Linux x86_64; rv:10.0.1) Gecko/20100101 Firefox/10.0.1','');
+/*!40000 ALTER TABLE `logs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resources`
+--
+
+DROP TABLE IF EXISTS `resources`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resources` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `resource` varchar(128) NOT NULL,
+  `common_name` varchar(128) NOT NULL,
+  `owner` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `resource` (`resource`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resources`
+--
+
+LOCK TABLES `resources` WRITE;
+/*!40000 ALTER TABLE `resources` DISABLE KEYS */;
+/*!40000 ALTER TABLE `resources` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resources_groups`
+--
+
+DROP TABLE IF EXISTS `resources_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resources_groups` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `resource` varchar(128) NOT NULL,
+  `ggroup` varchar(128) NOT NULL,
+  `read` tinyint(1) NOT NULL,
+  `write` tinyint(1) NOT NULL,
+  `owner` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `resource` (`resource`),
+  CONSTRAINT `resources_groups_ibfk_1` FOREIGN KEY (`resource`) REFERENCES `resources` (`resource`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resources_groups`
+--
+
+LOCK TABLES `resources_groups` WRITE;
+/*!40000 ALTER TABLE `resources_groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `resources_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `resources_users`
+--
+
+DROP TABLE IF EXISTS `resources_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `resources_users` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `resource` varchar(128) NOT NULL,
+  `uuser` varchar(128) NOT NULL,
+  `read` tinyint(1) NOT NULL,
+  `write` tinyint(1) NOT NULL,
+  `owner` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `resource` (`resource`),
+  CONSTRAINT `resources_users_ibfk_1` FOREIGN KEY (`resource`) REFERENCES `resources` (`resource`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `resources_users`
+--
+
+LOCK TABLES `resources_users` WRITE;
+/*!40000 ALTER TABLE `resources_users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `resources_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sessions` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `session_id` varchar(64) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `session_expire` int(10) NOT NULL,
+  `session_agent` varchar(64) NOT NULL,
+  `session_ip` varchar(64) NOT NULL,
+  `session_referer` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `session_id` (`session_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sessions`
+--
+
+LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+INSERT INTO `sessions` VALUES (38,'hsirdas5l69i9608qackle5tj1','87DA9B19B00D1B4AF5CE701044865463105E82701AE5076FEF69C640E34395BD801F6C68A74FDE581595DC43C9345B4A47FECB3C23BB64640513E0A32BEF64E61719590C9C4CDD538F2F8DABB1D2F86C3C32B8847DD0858861C585B380BAC4FC2595570AC5095662B868960DFBAE9DAEF431D6A4F7EB0E837F78F799AA24F2BC62F642E4B77A4790AB4B66A7CA124666025B88CD82EC1105CE5B0D6B609727B76B549E8669DAFE47CF8D696C96839F9B',1330104565,'aaee730e27efcaf20310bea4af442fd90bb627db','fe4ec28bebbd77cc25d2a7f97be3ebf50b8d477a','http://localhost:8080/software-licensing/');
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2012-02-24 12:05:13
