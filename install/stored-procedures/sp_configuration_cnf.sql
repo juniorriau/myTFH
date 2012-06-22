@@ -1,7 +1,7 @@
 DELIMITER //
 
 DROP PROCEDURE IF EXISTS Configuration_cnf_add//
-CREATE DEFINER='licesning'@'[dbHost]' PROCEDURE Configuration_cnf_add(IN `config` VARCHAR(64), IN `encrypt_key` INT(1), IN `private_key_type` VARCHAR(64), IN `digest_algorithm` VARCHAR(64), IN `private_key_bits` INT(4), IN `x509_extensions` VARCHAR(32), OUT `x` INT)
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Configuration_cnf_add(IN `config` VARCHAR(64), IN `encrypt_key` INT(1), IN `private_key_type` VARCHAR(64), IN `digest_algorithm` VARCHAR(64), IN `private_key_bits` INT(4), IN `x509_extensions` VARCHAR(32), OUT `x` INT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Add or updates OpenSSL configuration'
@@ -18,7 +18,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Configuration_cnf_get//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Configuration_cnf_get()
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Configuration_cnf_get()
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Retrieves OpenSSL configuration'

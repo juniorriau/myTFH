@@ -42,7 +42,7 @@
   <h2>Manage accounts</h2>
   <p></p>
   <div id="message"></div>
-  <form id="users" name="users" method="post" action="?nxs=proxy/users">
+  <form id="users" name="users" method="post" action="proxy/users">
    <label for="users">Select to edit: </label>
     <select id="users" name="users" placeholder="John Doe" style="width: 30%">
      {$users}

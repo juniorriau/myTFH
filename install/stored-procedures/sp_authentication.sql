@@ -1,7 +1,7 @@
 DELIMITER //
 
 DROP PROCEDURE IF EXISTS Auth_CheckUser//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Auth_CheckUser(IN `emailAddy` VARCHAR(128), IN `pword` LONGTEXT, IN `challenge` LONGTEXT)
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Auth_CheckUser(IN `emailAddy` VARCHAR(128), IN `pword` LONGTEXT, IN `challenge` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Performs authentication check'
@@ -10,7 +10,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Auth_GetLevelGroup//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Auth_GetLevelGroup(IN `emailAddy` VARCHAR(128), IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Auth_GetLevelGroup(IN `emailAddy` VARCHAR(128), IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Retrieves the users access level and group membership'

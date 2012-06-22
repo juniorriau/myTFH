@@ -103,7 +103,7 @@ class access {
 	private function __query()
 	{
 		return sprintf('CALL Configuration_access_get("%s")',
-						$this->registry->db->sanitize($this->registry->libs->_hash($this->registry->opts['dbKey'], $this->registry->libs->_salt($this->registry->opts['dbKey'], 2048))));
+						$this->registry->db->sanitize(hashes::init($this->registry)->_do($this->registry->opts['dbKey'])));
 	}
 
 	/**
@@ -209,7 +209,7 @@ class manageAccess
 		$list = 0;
 		try{
 			$sql = sprintf('CALL Configuration_access_get_list("%s")',
-							$this->registry->db->sanitize($this->registry->libs->_hash($this->registry->opts['dbKey'], $this->registry->libs->_salt($this->registry->opts['dbKey'], 2048))));
+							$this->registry->db->sanitize(hashes::init($this->registry)->_do($this->registry->opts['dbKey'])));
 			$list = $this->registry->db->query($sql, true);
 		} catch(PDOException $e){
 			// error handling
@@ -232,7 +232,7 @@ class manageAccess
 			$sql = sprintf('CALL Configuration_access_add("%s", "%s", "%s")',	
 							$this->registry->db->sanitize($data['name']),
 							$this->registry->db->sanitize($data['filter']),
-						    $this->registry->db->sanitize($this->registry->libs->_hash($this->registry->opts['dbKey'], $this->registry->libs->_salt($this->registry->opts['dbKey'], 2048))));
+						    $this->registry->db->sanitize(hashes::init($this->registry)->_do($this->registry->opts['dbKey'])));
 			$r = $this->registry->db->query($sql);
 		} catch(PDOException $e){
 			// error handling

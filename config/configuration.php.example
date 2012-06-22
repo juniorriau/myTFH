@@ -1,0 +1,39 @@
+[start]
+/* prevent direct access */
+if (!defined('__SITE')) exit('No direct calls please...');
+
+/* Database configuration settings */
+$settings['db']['engine']     = 'mysql';
+$settings['db']['hostname']   = '[dbHost]';
+$settings['db']['username']   = '[dbUser]';
+$settings['db']['password']   = '[dbPass]';
+$settings['db']['database']   = '[dbName]';
+
+/* Application specific settings */
+$settings['opts']['title']    = '[title]';
+$settings['opts']['timeout']  = '[timeout]';
+$settings['opts']['template'] = '[template]';
+$settings['opts']['caching']  = 'views/cache';
+$settings['opts']['flogin']   = '[flogin]';
+
+/* Session specific settings */
+$settings['sessions']['timeout'] = $settings['opts']['timeout'];
+$settings['sessions']['title']   = sha1($settings['opts']['title']);
+$settings['sessions']['cache']   = true;
+$settings['sessions']['cookie']  = true;
+$settings['sessions']['secure']  = true;
+$settings['sessions']['proto']   = true;
+
+/*
+ * Site wide random salt (WARNING)
+ * This random value gets generated upon initial framework
+ * installation. Various portions of the encryption
+ * features rely on this key. If you feel this key has been
+ * compromised you must use the install/repair.php utility
+ * which will first decrypt each database table then generate
+ * a new random site key and re-encrypt and store the
+ * database contents. If you change this manually you will
+ * loose everything in the database. You have been warned.
+ */
+$settings['sessions']['db-key']   = '[hash]';
+[stop]

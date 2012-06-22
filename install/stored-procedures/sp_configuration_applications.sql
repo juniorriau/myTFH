@@ -1,7 +1,7 @@
 DELIMITER //
 
 DROP PROCEDURE IF EXISTS Configuration_applications_add//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Configuration_applications_add(IN `application` VARCHAR(255), IN `url` VARCHAR(255), IN `ip` LONGTEXT, `skey` LONGTEXT)
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Configuration_applications_add(IN `application` VARCHAR(255), IN `url` VARCHAR(255), IN `ip` LONGTEXT, `skey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Add or updates existing records for allowed applications'
@@ -16,7 +16,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Configuration_applications_get//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Configuration_applications_get(IN `skey` LONGTEXT)
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Configuration_applications_get(IN `skey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Returns list of allowed applications'
@@ -25,7 +25,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Configuration_applications_search//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Configuration_applications_search(IN `dmn` VARCHAR(128), IN `skey` LONGTEXT)
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Configuration_applications_search(IN `dmn` VARCHAR(128), IN `skey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Searches for specified domain in list of allowed applications'

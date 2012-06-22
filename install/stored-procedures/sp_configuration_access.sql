@@ -1,7 +1,7 @@
 DELIMITER //
 
 DROP PROCEDURE IF EXISTS Configuration_access_add//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Configuration_access_add(IN `name` VARCHAR(32), IN `filter` VARCHAR(255), `skey` LONGTEXT)
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Configuration_access_add(IN `name` VARCHAR(32), IN `filter` VARCHAR(255), `skey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Add or updates denied access control lists'
@@ -16,7 +16,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Configuration_access_del//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Configuration_access_del(IN `name` VARCHAR(32))
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Configuration_access_del(IN `name` VARCHAR(32))
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Deletes access control list entry'
@@ -25,7 +25,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Configuration_access_list//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Configuration_access_list(IN `skey` LONGTEXT)
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Configuration_access_list(IN `skey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Returns list of access controls'
@@ -34,7 +34,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Configuration_access_get//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Configuration_access_get(IN `skey` LONGTEXT)
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Configuration_access_get(IN `skey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Returns list of access controls'

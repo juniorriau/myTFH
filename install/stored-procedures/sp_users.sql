@@ -1,7 +1,7 @@
 DELIMITER //
 
 DROP PROCEDURE IF EXISTS Users_AddUpdate//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Users_AddUpdate(IN `email` VARCHAR(128), IN `password` LONGTEXT, IN `lvl` VARCHAR(40), IN `grp` VARCHAR(128), IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Users_AddUpdate(IN `email` VARCHAR(128), IN `password` LONGTEXT, IN `lvl` VARCHAR(40), IN `grp` VARCHAR(128), IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Add or updates user accounts'
@@ -13,7 +13,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Users_verify//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Users_verify(IN `email` VARCHAR(128), IN `password` LONGTEXT, IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Users_verify(IN `email` VARCHAR(128), IN `password` LONGTEXT, IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Verifies user account for authentication'
@@ -22,7 +22,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Users_AddUpdateToken//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Users_AddUpdateToken(IN `emailAddy` VARCHAR(128), IN `token` LONGTEXT, IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Users_AddUpdateToken(IN `emailAddy` VARCHAR(128), IN `token` LONGTEXT, IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Updates users authentication token'
@@ -32,7 +32,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Users_GetToken//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Users_GetToken(IN `emailAddy` VARCHAR(128), IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Users_GetToken(IN `emailAddy` VARCHAR(128), IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Decrypts and retrieves users authenticated token signature'
@@ -41,7 +41,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Users_GetLevelGroup//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Users_GetLevelGroup(IN `email` VARCHAR(128), IN `sKey` LONGTEXT)
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Users_GetLevelGroup(IN `email` VARCHAR(128), IN `sKey` LONGTEXT)
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Retrieves the users access level and group membership'
@@ -50,7 +50,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Groups_GetList//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Groups_GetList()
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Groups_GetList()
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Returns list of currently configured groups'
@@ -59,7 +59,7 @@ BEGIN
 END//
 
 DROP PROCEDURE IF EXISTS Levels_GetList//
-CREATE DEFINER='[dbName]'@'[dbHost]' PROCEDURE Levels_GetList()
+CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Levels_GetList()
  DETERMINISTIC
  SQL SECURITY INVOKER
  COMMENT 'Returns list of currently configured access levels'

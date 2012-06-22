@@ -42,7 +42,7 @@
   <h2>Manage access</h2>
   <p>Create defined lists of allowed & denied clients. Individual records get automatically added to the deny list when threat detection is reached</p>
   <div id="message"></div>
-  <form id="acl" name="acl" method="post" action="?nxs=proxy/acl">
+  <form id="acl" name="acl" method="post" action="proxy/acl">
    <label for="acl">Select to edit: </label>
     <select id="acl" name="acl" placeholder="ACL-name" style="width: 30%">
      {$acl}

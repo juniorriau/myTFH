@@ -11,12 +11,12 @@ $j(document).ready(function(){
  <h2>Authenticate</h2>
  <p>Please provide username & password</p>
  <div id="message">{$message}</div>
- <form id="auth" name="authenticate" method="post" action="{$server}/?nxs=proxy/authenticate">
+ <form id="auth" name="authenticate" method="post" action="{$server}/proxy/authenticate">
   <label for="email">Email: </label>
    <input type="email" id="email" name="email" value="" placeholder="Enter email address" required="required" /><span class="required">*</span>
   <label for="password">Password: </label>
    <input type="password" id="password" name="password" value="" placeholder="Enter passphrase" required="required" /><span class="required">*</span>
   <input type="submit" value="Authenticate" id="submit-button" />
-  <a href="{$server}/?nxs=proxy/register">Register</a> | <a href="{$server}/?nxs=proxy/reset">Forgot username?</a>
+  <a href="{$server}/proxy/register">Register</a> | <a href="{$server}/proxy/reset">Forgot username?</a>
  </form>
 </div>

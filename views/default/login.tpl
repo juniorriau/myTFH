@@ -9,13 +9,13 @@ $j(document).ready(function(){
  <h2>Authenticate</h2>
  <p>Please login to view active software licenses</p>
  <div id="message"></div>
- <form id="auth" name="authenticate" method="post" action="?nxs=proxy/authenticate">
+ <form id="auth" name="authenticate" method="post" action="proxy/authenticate">
   <label for="email">Email: </label>
-   <input type="email" id="email" name="email" value="" placeholder="Enter email address" required="required" /><span class="required">*</span>
+   <input type="text" id="email" name="email" value="" placeholder="Enter email address" required="required" /><span class="required">*</span>
   <label for="password">Password: </label>
    <input type="password" id="password" name="password" value="" placeholder="Enter passphrase" required="required" /><span class="required">*</span>
   <input type="submit" value="Authenticate" id="submit-button" />
-  <a href="">Register</a> | <a href="">Forgot username?</a>
+  <a href="proxy/register">Register</a> | <a href="proxy/reset">Forgot username?</a>
  </form>
 </div>
 <!-- authentication template end -->

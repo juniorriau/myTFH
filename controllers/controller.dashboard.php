@@ -39,7 +39,9 @@ class dashboardController
 	public function __construct($registry)
 	{
 		$this->registry = $registry;
-		$this->registry->auth = authentication::instance($this->registry);
+		if (class_exists('authentication')){
+			$this->registry->auth = authentication::instance($this->registry);
+		}
 	}
 
 	/**

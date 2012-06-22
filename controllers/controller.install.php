@@ -3,7 +3,7 @@
 if (!defined('__SITE')) exit('No direct calls please...');
 
 /**
- * Handle default page views
+ * Handles installation
  *
  *
  * LICENSE: This source file is subject to version 3.01 of the GPL license
@@ -11,8 +11,8 @@ if (!defined('__SITE')) exit('No direct calls please...');
  * http://www.gnu.org/licenses/gpl.html.  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
  *
- * @category   views
- * @discussion Handles default page views
+ * @category   controllers
+ * @discussion Handles installation
  * @author     jason.gerfen@gmail.com
  * @copyright  2008-2012 Jason Gerfen
  * @license    http://www.gnu.org/licenses/gpl.html  GPL License 3
@@ -20,10 +20,10 @@ if (!defined('__SITE')) exit('No direct calls please...');
  */
 
 /**
- *! @class indexController
- *  @abstract Handles default page views
+ *! @class installController
+ *  @abstract Handles the dashboard
  */
-class indexController
+class installController
 {
 
 	/**
@@ -40,6 +40,12 @@ class indexController
 	public function __construct($registry)
 	{
 		$this->registry = $registry;
+		$this->_do($_POST);
+	}
+
+	private function _do($args)
+	{
+		install::init($this->registry)->_main($args);
 	}
 
 	/**
@@ -48,10 +54,10 @@ class indexController
 	 */
 	public function index()
 	{
-		if (file_exists('views/view.index.php')){
-			require 'views/view.index.php';
+		if (file_exists('views/view.install.php')){
+			require 'views/view.install.php';
 		}
-		indexView::instance($this->registry);
+		installView::instance($this->registry);
 	}
 }
 ?>

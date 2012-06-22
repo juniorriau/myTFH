@@ -42,7 +42,7 @@
   <h2>Manage applications</h2>
   <p>Here you can add refering applications explicit access for using authentication service</p>
   <div id="message"></div>
-  <form id="app" name="app" method="post" action="?nxs=proxy/app">
+  <form id="app" name="app" method="post" action="proxy/app">
    <label for="applications">Select to edit: </label>
     <select id="applications" name="applications" placeholder="AllowThisApp" style="width: 30%">
      {$applications}

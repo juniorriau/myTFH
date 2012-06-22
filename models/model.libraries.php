@@ -282,30 +282,6 @@ class libraries {
 	}
 
 	/**
-	 * @function _salt
-	 * @abstract Generate a random salt value of specified length based on input
-	 */
-	public function _salt($string, $len=null)
-	{
-		return (!empty($len)) ?
-			hash('sha512', str_pad($string, (strlen($string) + $len), substr(hash('sha512', $string), @round((float)strlen($string)/3, 0, PHP_ROUND_HALF_UP), ($len - strlen($string))), STR_PAD_BOTH)) :
-			hash('sha512', substr($string, @round((float)strlen($string)/3, 0, PHP_ROUND_HALF_UP), 16));
-	}
-
-	/**
-	 * @function _hash
-	 * @abstract Mimic bcrypt hasing functionality
-	 */
-	public function _hash($string, $salt=null)
-	{
-		return (CRYPT_BLOWFISH===1) ?
-			(!empty($salt)) ?
-				crypt($string, "\$2a\$07\$".substr($salt, 0, CRYPT_SALT_LENGTH)) :
-				crypt($string, $this->_salt("\$2a\$07\$".substr($string, 0, CRYPT_SALT_LENGTH))) :
-					false;
-	}
-
-	/**
 	 * @function _serialize
 	 * @abstract Perform serialization of sent POST data. This is required for the
 	 *           jQuery.AJAX plug-in checksum verification as the current PHP
@@ -329,11 +305,16 @@ class libraries {
 	 */
 	public function _genOptionsList($array, $i)
 	{
-		$l = false;
+		$l = false;	$x=0;
 		if ((is_array($array)) && (count($array) > 0)) {
 			$l = '<option id="" value="">Make a selection...</option>';
 			foreach($array as $key => $value) {
-				$l .= (!empty($i)) ? '<option id="" value="'.$value[$i].'">'.$value[$i].'</option>' : '<option id="" value="'.$value.'">'.$value.'</option>';
+				if (!empty($value[$i])){
+					$l .= (!empty($i)) ? '<option id="" value="'.$value[$i].'">'.$value[$i].'</option>' : '<option id="" value="'.$value[$key].'">'.$value[$key].'</option>';
+				} else {
+					$l .= '<option id="" value="'.$value[$x].'">'.$value[$x].'</option>';
+				}
+				$x++;
 			}
 		}
 		return $l;
@@ -351,6 +332,30 @@ class libraries {
 			// error handler
 		}
         return (($r) && (is_array($r))) ? $r : false;
+	}
+
+	/**
+	 * @function _templates
+	 * @abstract Generates select list of available templates
+	 */
+	public function _templates($folder)
+	{
+		if (is_dir($folder)) {
+			$x=0;
+			if (($handle = opendir($folder))!==false) {
+				while (($dir = readdir($handle))!==false) {
+					if (($dir!=='.')&&($dir!=='..')&&($dir!=='admin')&&($dir!=='cache')) {
+						if (is_dir($folder.'/'.$dir)){
+							$dirs[$x][] = preg_replace('/..\//', '', $folder).'/'.$dir;
+						}
+					}
+					$x++;
+				}
+			} else {
+				return false;
+			}
+		}
+		return (count($dirs)!==0) ? $dirs : false;
 	}
 
 	public function __clone() {

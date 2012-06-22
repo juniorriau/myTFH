@@ -109,7 +109,7 @@ class openssl
 	 * @param $int int Size of random bytes to produce
 	 * @return string
 	 */
-	public function altRand($int = 2048)
+	private function altRand($int = 2048)
 	{
 		if (is_readable('/dev/random')){
 			$f=fopen('/dev/random', 'r');
@@ -151,11 +151,11 @@ class openssl
 	 * @param $int int Size of random bytes to produce
 	 * @return string
 	 */
-	public function _altRand($int = 2048)
+	private function _altRand($int = 2048)
 	{
 		for ($i=0;$i<$int;++$i){
 			if ($i%2==0){
-				mt_srand(time()%2147 * 1000000 + (double)microtime() * 1000000);
+				mt_srand(time()%2147 * mt_rand() + (double)microtime() * mt_rand());
 			}
 			$rand=48+mt_rand()%64;
 			$r.=chr($rand);

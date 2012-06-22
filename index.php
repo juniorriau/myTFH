@@ -5,18 +5,16 @@ define('__SITE', realpath(dirname(__FILE__)));
 
 /* first load the application config */
 if (!file_exists(__SITE.'/config/configuration.php')){
- exit('Necessary configuration missing, unable to proceed.');
+	header('Location: install.php');
 }
 include __SITE.'/config/configuration.php';
 
-/* verify settings, or call the installer */
-if (!is_array($settings)){
-	exit('Necessary configuration settings missing.');
-}
-
 /* verify settings exist */
-if ((empty($settings['db']['hostname']))&&(empty($settings['db']['username']))&&(empty($settings['db']['password']))&&(empty($settings['db']['database']))){
-	exit('Necessary configuration options missing.');
+if (((empty($settings['db']['hostname']))||($settings['db']['hostname']=='[dbHost]'))&&
+	((empty($settings['db']['username']))||($settings['db']['username']=='[dbUser]'))&&
+	((empty($settings['db']['password']))||($settings['db']['password']=='[dbPass]'))&&
+	((empty($settings['db']['database']))||($settings['db']['database']=='[dbName]'))){
+	header('Location: install.php');
 }
 
 /* execute autoload */
@@ -50,14 +48,16 @@ if (!class_exists($eng)){
 }
 $registry->db = new $eng($settings['db']);
 
-/* prepare the secret key */
-$settings['sessions']['db-key'] = $registry->libs->_hash($settings['sessions']['db-key'], $registry->libs->_salt($settings['sessions']['db-key'], 2048));
-
 /* query for application settings */
+
+/* prepare the secret key */
+if (!class_exists('hashes')) {
+	exit('Error loading required hashing libraries, unable to proceed. 0x0c7');
+}
 
 /* load and start up session support */
 if (!class_exists('dbSession')){
-	exit('Error loading database session support, unable to proceed. 0x0c6');
+	exit('Error loading database session support, unable to proceed. 0x0c8');
 }
 
 /* create new instance of sessions? */
@@ -77,13 +77,13 @@ $registry->opts = $settings['opts'];
 
 /* start logging access */
 if (!class_exists('logging')){
-	exit('Error initializing logging class, unable to proceed. 0x0c7');
+	exit('Error initializing logging class, unable to proceed. 0x0c9');
 }
 new logging($registry);
 
 /* load up access filtering */
 if (!class_exists('access')){
-	exit('Error initializing access class, unable to proceed. 0x0c8');
+	exit('Error initializing access class, unable to proceed. 0x0c10');
 }
 
 /* perform check against ACL to visitor */
@@ -101,7 +101,7 @@ header('X-XSS-Protecton: 1;mode=deny');
 
 /* initialize the allowed applications class */
 if (!class_exists('applications')) {
-	exit('Error initializing applications class, unable to proceed. 0x0c10');
+	exit('Error initializing applications class, unable to proceed. 0x0c11');
 }
 
 /* perform comparision of whitelist & set necessary CORS headers if allowed */

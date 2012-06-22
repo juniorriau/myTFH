@@ -88,7 +88,7 @@ class remoteView
 
 		if (!empty($_SERVER['HTTP_X_TOKEN'])) {
 			$this->registry->keyring = new keyring($this->registry, $this->registry->val->__do($_POST));
-			$x=authentication::instance($this->registry)->__reauth($_SESSION[getenv('HTTP_CLIENT_IP')]['token'], $_SERVER['HTTP_X_TOKEN']);
+			$x = authentication::instance($this->registry)->__reauth($_SESSION[getenv('HTTP_CLIENT_IP')]['token'], $_SERVER['HTTP_X_TOKEN']);
 		}
 
 		$x = $this->_message($x);
@@ -106,22 +106,24 @@ class remoteView
 	 */
 	private function _message($array) {
 		$x='';
-		switch($array){
-			case array_key_exists('success', $array):
-				$x = '<div class="success">'.$array['success'].'</div>';
-				break;
-			case array_key_exists('error', $array):
-				$x = '<div class="error">'.$array['error'].'</div>';
-				break;
-			case array_key_exists('warning', $array):
-				$x = '<div class="warning">'.$array['warning'].'</div>';
-				break;
-			case array_key_exists('info', $array):
-				$x = '<div class="info">'.$array['info'].'</div>';
-				break;
-			default:
-				$x = $x;
-				break;
+		if (count($array)>0){
+			switch($array){
+				case array_key_exists('success', $array):
+					$x = '<div class="success">'.$array['success'].'</div>';
+					break;
+				case array_key_exists('error', $array):
+					$x = '<div class="error">'.$array['error'].'</div>';
+					break;
+				case array_key_exists('warning', $array):
+					$x = '<div class="warning">'.$array['warning'].'</div>';
+					break;
+				case array_key_exists('info', $array):
+					$x = '<div class="info">'.$array['info'].'</div>';
+					break;
+				default:
+					$x = $x;
+					break;
+			}
 		}
 		return $x;
 	}

@@ -1,10 +1,9 @@
 <?php
+/* prevent direct access */
+if (!defined('__SITE')) exit('No direct calls please...');
 
 /* define the namespace */
 //namespace models\registry;
-
-/* prevent direct access */
-if (!defined('__SITE')) exit('No direct calls please...');
 
 class registry
 {

@@ -69,7 +69,7 @@ class applications {
 	 */
 	public function _do($url)
 	{
-		if (in_array($url, $this->_get($url))) {
+		if ($this->_verify($url, $this->_get($url))) {
 			header('Access-Control-Max-Age: 1728000');
 			header('Access-Control-Allow-Origin: '.$url);
 			header('Access-Control-Allow-Methods: POST');
@@ -89,12 +89,47 @@ class applications {
 		try{
 			$sql = sprintf('CALL Configuration_applications_search("%s", "%s")',
 							$this->registry->db->sanitize($url),
-							$this->registry->db->sanitize($this->registry->libs->_hash($this->registry->opts['dbKey'], $this->registry->libs->_salt($this->registry->opts['dbKey'], 2048))));
+							$this->registry->db->sanitize(hashes::init($this->registry)->_do($this->registry->opts['dbKey'])));
 			$list = $this->registry->db->query($sql);
 		} catch(PDOException $e){
 			// error handling
 		}
 		return $list;
+	}
+
+	/**
+	 *! @function _verify
+	 *  @abstract Performs lookup on currently supplied hostname2ip array
+	 */
+	private function _verify($url, $obj)
+	{
+		if (!empty($obj)) {
+			$obj = $this->_split($obj);
+			if ($obj) {
+				$n = new networking;
+				$url = $n->hostname2iparray($url);
+				if (is_array($url)) {
+					foreach($url as $key => $value) {
+						if ((in_array($value, $obj))||($value===$obj)) return true;
+					}
+				} elseif($url===$obj) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 *! @function _split
+	 *  @abstract Splits JSON encoded object of valid IP's
+	 */
+	private function _split($obj)
+	{
+		if (preg_match('/\{\}/', $obj)) {
+			return json_decode($obj);
+		}
+		return $obj;
 	}
 
 	public function __destruct()
@@ -179,8 +214,8 @@ class manageApplications
 	{
 		$list = 0;
 		try{
-			$sql = sprintf('CALL Configuration_access_get_list("%s")',
-							$this->registry->db->sanitize($this->registry->libs->_hash($this->registry->opts['dbKey'], $this->registry->libs->_salt($this->registry->opts['dbKey'], 2048))));
+			$sql = sprintf('CALL Configuration_applications_get("%s")',
+							$this->registry->db->sanitize(hashes::init($this->registry)->_do($this->registry->opts['dbKey'])));
 			$list = $this->registry->db->query($sql);
 		} catch(PDOException $e){
 			// error handling
@@ -199,18 +234,22 @@ class manageApplications
 			return $r;
 		}
 
+		$data['ip'] = $this->__verify($data['url']);
+
+		if (!$data['ip']) return array('error'=>'Could not obtain DNS entry for associated URL');
+
 		try{
-			$sql = sprintf('CALL Configuration_access_add("%s", "%s", "%s", "%s")',	
-							$this->registry->db->sanitize($data['type']),
-							$this->registry->db->sanitize($data['name']),
-							$this->registry->db->sanitize($data['filter']),
-						    $this->registry->db->sanitize($this->registry->libs->_hash($this->registry->opts['dbKey'], $this->registry->libs->_salt($this->registry->opts['dbKey'], 2048))));
+			$sql = sprintf('CALL Configuration_applications_add("%s", "%s", "%s", "%s")',	
+							$this->registry->db->sanitize($data['application']),
+							$this->registry->db->sanitize($data['url']),
+							$this->registry->db->sanitize($data['ip']),
+						    $this->registry->db->sanitize(hashes::init($this->registry)->_do($this->registry->opts['dbKey'])));
 			$r = $this->registry->db->query($sql);
 		} catch(PDOException $e){
 			// error handling
 		}
 
-		return ($r > 0) ? array('success'=>'Successfully added new ACL') : array('error'=>'An error occured adding new ACL');
+		return ($r > 0) ? array('success'=>'Successfully added new application') : array('error'=>'An error occured adding new application');
 	}
 
 	/**
@@ -228,5 +267,21 @@ class manageApplications
 		return $x;
 	}
 
+	/**
+	 *! @function __verify
+	 *  @abstract Verify URL provided and return IP if valid
+	 */
+	private function __verify($url)
+	{
+		$n = new networking;
+		$x = $n->hostname2iparray(preg_replace('/http:\/\/|https:\/\//', '', $url));
+		if (count($x)===0) return false;
+		if (count($x)>1){
+			$x = $this->registry->libs->JSONencode($x);
+		} else {
+			$x = $x[0];
+		}
+		return $x;
+	}
 }
 ?>

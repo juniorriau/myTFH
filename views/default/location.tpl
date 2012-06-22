@@ -62,18 +62,36 @@ function loadScript() {
  document.body.appendChild(script);
 }
 window.onload = loadScript;
+$(function () {
+ var msie6 = $.browser == 'msie' && $.browser.version < 7;
+ if (!msie6) {
+  var top = $('#float').offset().top - parseFloat($('#float').css('margin-top').replace(/auto/, 0));
+  $(window).scroll(function (event) {
+   var y = $(this).scrollTop();
+   if (y >= top) {
+    $('#float').addClass('fixed');
+   } else {
+    $('#float').removeClass('fixed');
+   }
+  });
+ }  
+});
 </script>
-<div id="form" class="rounder gradient">
- <h2>Location</h2>
- <p></p>
- <div id="map" style="width:95%; height:400px"></div>
- <div id="infoPanel" class="small">
-  <b>Marker status:</b>
-  <div id="markerStatus"><i>Click and drag the marker.</i></div>
-  <b>Current position:</b>
-  <div id="info"></div>
-  <b>Closest matching address:</b>
-  <div id="address"></div>
+<div id="floatWrapper">
+ <div id="float">
+  <div id="form" class="rounder gradient">
+   <h2>Location</h2>
+   <p>Drag the marker to your location if it does not auto-matically populate the correct address information</p>
+   <div id="map" style="width:95%; height:400px"></div>
+   <div id="infoPanel" class="small">
+    <b>Marker status:</b>
+    <div id="markerStatus"><i>Click and drag the marker.</i></div>
+    <b>Current position:</b>
+    <div id="info"></div>
+    <b>Closest matching address:</b>
+    <div id="address"></div>
+   </div>
+  </div>
  </div>
 </div>
 <!-- location template end -->

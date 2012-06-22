@@ -1,5 +1,5 @@
 *{
- margin:0px 0px 0px 0px;
+ margin: 0px 0px 0px 0px;
 }
 
 body,html{
@@ -64,6 +64,10 @@ a{
 
 a:hover{
  color:#5E9DC8;
+}
+
+p{
+ padding: 5px 5px 5px 10px;
 }
 
 #full{
@@ -192,6 +196,25 @@ a:hover{
 
 #form textarea{
  width:70%;
+}
+
+#float {
+ position: absolute;
+ top: 15;
+ width:350px;
+}
+
+#float.fixed {
+ position: fixed;
+ width:350px;
+ top: 15;
+}
+
+#floatWrapper { /* required to avoid jumping */
+ /*left: 550px;*/
+ position: absolute;
+ /*margin-left: 35px;*/
+ width:350px;
 }
 
 .info, .success, .warning, .error, .validation, .spinner{

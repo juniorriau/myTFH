@@ -136,7 +136,7 @@ class users
 		}
 
 		/* because we want a strong password per account blowfish hash & salt it with site wide key */
-		$keys['pwd'] = $this->registry->libs->_hash($details['password'], $this->registry->libs->_salt($this->registry->opts['dbKey'], 2048));
+		$keys['pwd'] = hashes::init($this->registry)->_do($details['password'], $this->registry->opts['dbKey']);
 
 		$keys['pri'] = $this->registry->keyring->ssl->genPriv($keys['pwd']);
 		$keys['pub'] = $this->registry->keyring->ssl->genPub();
@@ -233,7 +233,7 @@ class users
                            $this->registry->db->sanitize($user['name']),
                            $this->registry->db->sanitize($uw),
                            $this->registry->db->sanitize($ur),
-                           $this->registry->db->sanitize($this->registry->libs->_hash($this->registry->opts['dbKey'], $this->registry->libs->_salt($this->registry->opts['dbKey'], 2048))));
+                           $this->registry->db->sanitize(hashes::init($this->registry)->_do($this->registry->opts['dbKey'])));
             $r = $this->registry->db->query($sql);
         } catch(Exception $e) {
             return false;
@@ -289,7 +289,7 @@ class users
     private function __permsUser($u)
     {
 		try {
-			$sql = sprintf('CALL Perms_SearchUser("%s", "%s")', $this->registry->db->sanitize($u), $this->registry->db->sanitize($this->registry->libs->_hash($this->registry->opts['dbKey'], $this->registry->libs->_salt($this->registry->opts['dbKey'], 2048))));
+			$sql = sprintf('CALL Perms_SearchUser("%s", "%s")', $this->registry->db->sanitize($u), $this->registry->db->sanitize(hashes::init($this->registry)->_do($this->registry->opts['dbKey'])));
 			$r = $this->registry->db->query($sql);
 		} catch(Exception $e) {
 			// error handler
@@ -304,7 +304,7 @@ class users
     private function __permsGroup($g)
     {
 		try {
-			$sql = sprintf('CALL Perms_SearchGroup("%s", "%s")', $this->registry->db->sanitize($g), $this->registry->db->sanitize($this->registry->libs->_hash($this->registry->opts['dbKey'], $this->registry->libs->_salt($this->registry->opts['dbKey'], 2048))));
+			$sql = sprintf('CALL Perms_SearchGroup("%s", "%s")', $this->registry->db->sanitize($g), $this->registry->db->sanitize(hashes::init($this->registry)->_do($this->registry->opts['dbKey'])));
 			$r = $this->registry->db->query($sql);
 		} catch(Exception $e) {
 			// error handler

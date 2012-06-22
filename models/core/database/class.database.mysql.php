@@ -224,7 +224,7 @@ class pdoMySQL extends mysqlDBconn
 	 */
 	private function createdsn($settings)
 	{
-		return 'mysql:host='.$settings['hostname'].';dbname='.$settings['database'];
+		return (!empty($settings['database'])) ? 'mysql:host='.$settings['hostname'].';dbname='.$settings['database'] : 'mysql:host='.$settings['hostname'].';';
 	}
 
 	/**

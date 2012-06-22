@@ -1,14 +1,19 @@
 -- Create the database & drop if it already exists
-DROP DATABASE IF EXISTS `licensing`;
-CREATE DATABASE `licensing`;
+DROP DATABASE IF EXISTS `[dbName]`;
+CREATE DATABASE `[dbName]`;
+
+-- Grant priviledge for account then drop it
+GRANT USAGE ON *.* TO "[dbUser]"@"[dbHost]";
+DROP USER "[dbUser]"@"[dbHost]";
+FLUSH PRIVILEGES;
 
 -- Create a default user and assign limited permissions
-CREATE USER "licensing"@"localhost" IDENTIFIED BY "d3v3l0pm3n+";
-GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES, INDEX, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE ON `licensing`.* TO "licensing"@"localhost";
+CREATE USER "[dbUser]"@"[dbHost]" IDENTIFIED BY "[dbPassword]";
+GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES, INDEX, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE ON `[dbName]`.* TO "[dbUser]"@"[dbHost]";
 FLUSH PRIVILEGES;
 
 -- Switch to newly created db context
-USE `licensing`;
+USE `[dbName]`;
 
 -- Set FK checks to 0 during table creation
 SET foreign_key_checks = 0;
@@ -82,6 +87,7 @@ CREATE TABLE IF NOT EXISTS `authentication` (
 DROP TABLE IF EXISTS `configuration`;
 CREATE TABLE IF NOT EXISTS `configuration` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
+  `version` varchar(15) NOT NULL,
   `title` varchar(128) NOT NULL,
   `templates` varchar(255) NOT NULL,
   `cache` varchar(255) NOT NULL,
@@ -101,6 +107,8 @@ CREATE TABLE IF NOT EXISTS `configuration` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=0;
+
+INSERT INTO `configuration` (`version`) VALUES ("0.1");
 
 -- Create a table for client acess control list
 --  Primary key: id
@@ -122,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `configuration_applications` (
   `resource` varchar(128) NOT NULL,
   `application` VARCHAR(255) NOT NULL,
   `url` VARCHAR(255) NOT NULL,
-  `ip` LONGTEXT, NOT NULL,
+  `ip` longtext NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `resource` (`resource`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=0;
@@ -141,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `configuration_openssl_cnf` (
   `encrypt_key_cipher` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=0;
 
-INSERT INTO `configuration_openssl_cnf` (`id`, `config`, `encrypt_key`, `private_key_type`, `digest_algorithm`, `private_key_bits`, `x509_extensions`, `encrypt_key_cipher`) VALUES (1, 'config/openssl.cnf', 1, 'OPENSSL_KEYTYPE_RSA', 'sha1', 2048, 'usr_cert', 'OPENSSL_CIPHER_3DES');
+INSERT INTO `configuration_openssl_cnf` (`id`, `config`, `encrypt_key`, `private_key_type`, `digest_algorithm`, `private_key_bits`, `x509_extensions`, `encrypt_key_cipher`) VALUES (1, 'config/openssl.cnf', 1, 'OPENSSL_KEYTYPE_RSA', 'sha1', 2048, 'usr_cert', 'OPENSSL_CIPHER_AES_256_CBC');
 
 -- Create a table for configuration of OpenSSL keys
 --  Primary key: id
