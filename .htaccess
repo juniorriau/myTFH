@@ -1,0 +1,63 @@
+ <IfModule mod_rewrite.c>
+  Options +FollowSymLinks
+  RewriteEngine on
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(\w+)$ index.php?nxs=$1 [L]
+  RewriteRule ^(\w+)\/(\w+)$ index.php?nxs=$1/$2 [L]
+ </IfModule>
+
+ <FilesMatch "^(\.htaccess)">
+  Deny from all
+ </FilesMatch>
+
+ <IfModule mod_defalte.c>
+  <FilesMatch "\.(php|html|js|css)$">
+   SetOutputFilter DEFLATE
+  </FilesMatch>
+ </IfModule>
+
+ <IfModule mod_header.c>
+  <FilesMatch "\.(gif|jpg|jpeg|png)$">
+   Header set "Cache-control max-age=290304000, public"
+  </FilesMatch>
+  <FilesMatch "\.(php|html|js|css)$">
+   Header set Cache-control "max-age=290304000, public, must-revalidate"
+  </FilesMatch>
+ </IfModule>
+
+ <IfModule mod_gzip.c>
+  mod_gzip_on                                     Yes
+  mod_gzip_can_negotiate                          Yes
+  mod_gzip_static_suffix                          .gz
+  AddEncoding                     gzip            .gz
+  mod_gzip_update_static                          No
+  mod_gzip_command_version                        '/mod_gzip_status'
+  mod_gzip_keep_workfiles                         No
+  mod_gzip_minimum_file_size                      512
+  mod_gzip_maximum_file_size                      1048576
+  mod_gzip_maximum_inmem_size                     60000
+  mod_gzip_min_http                               1000
+  mod_gzip_handle_methods                         GET POST
+  <FilesMatch "\.(txt|php|html|js|css)$">
+   mod_gzip_item_include           mime            ^text/.*
+   mod_gzip_item_include           mime            ^httpd/unix-directory$
+   mod_gzip_item_include           file            \.shtml$
+   mod_gzip_item_include           file            \.html$
+   mod_gzip_item_include           mime            ^application/x-javascript$
+   mod_gzip_item_include           mime            ^application/javascript$
+   mod_gzip_item_include           file            \.js$
+   mod_gzip_item_include           file            \.css$
+   mod_gzip_item_include           mime            ^application/x-httpd-php$
+   mod_gzip_item_include           file            \.php$
+   mod_gzip_item_include           handler         ^cgi-script$
+  </FilesMatch>
+
+  mod_gzip_dechunk                                Yes
+
+  <FilesMatch "\.(gif|jpg|jpeg|png)$">
+   mod_gzip_item_exclude           mime            ^image/.$
+   mod_gzip_item_exclude           mime            ^image/
+   mod_gzip_item_exclude           rspheader       Content-Type:image/*
+  </FilesMatch>
+ </IfModule>
