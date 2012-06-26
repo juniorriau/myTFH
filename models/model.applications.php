@@ -107,7 +107,7 @@ class applications {
 			$obj = $this->_split($obj);
 			if ($obj) {
 				$n = new networking;
-				$url = $n->hostname2iparray($url);
+				$url = $n->hostname2iparray(preg_replace('/http:\/\/|https:\/\//', '', $url));
 				if (is_array($url)) {
 					foreach($url as $key => $value) {
 						if ((in_array($value, $obj))||($value===$obj)) return true;
