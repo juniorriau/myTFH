@@ -1,11 +1,41 @@
+pidCrypt JS libraries
+ https://www.pidder.com/pidcrypt/
+
+ Components of the pidCrypt libraries are attributed to:
+ B. Poettering
+  http://point-at-infinity.org/jsaes/
+
+ Chris Veness - AES core implementation (GNU GPL)
+  http://www.movable-type.co.uk/scripts/aes.html
+
+ Lapo Luchini - AES CTR mode implementation (GNU LGPL)
+  http://lapo.it/asn1js/
+
+ Peter Gutmann - ASN.1 parser (ISC license)
+  http://www.cs.auckland.ac.nz/~pgut001/dumpasn1.cfg
+
+ Tom Wu - RSA, bigint & rng implementations (MIT license)
+  http://www-cs-students.stanford.edu/~tjw/jsbn/
+
+ WebToolkit.info - MD5 & SHA-1 implementations (???)
+
+ Angel Marin - SHA256 implementation (BSD license)
+  http://anmar.eu.org/
+
+ Brian Turek - SHA-384 & SHA-512 implementations (BSD license)
+  http://jssha.sourceforge.net/
+
+jQuery (Dual MIT & GPL)
+ http://jquery.com
+
 jQuery.handleStorage plug-in
  https://github.com/jas-/jQuery.handleStorage
- 
+
 jQuery.AJAX plug-in
  https://github.com/jas-/jQuery.AJAX
- 
+
 jQuery.pidCrypt plug-in
  https://github.com/jas-/jQuery.pidCrypt
- 
-myFrameWork MVC
- https://github.com/jas-/myFrameWork
+
+PHP MVC Framework (no public project)
+ Jason Gerfen <jason.gerfen@gmail.com>
