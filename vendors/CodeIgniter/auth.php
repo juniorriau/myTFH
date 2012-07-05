@@ -58,10 +58,9 @@ function _do($sso, $uid, $opt, $referer, $token)
 	curl_setopt($h, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
 	curl_setopt($h, CURLOPT_REFERER, $referer);
 	curl_setopt($h, CURLOPT_HTTPHEADER, $opt);
-	/* this should be updated to verify existing certificates */
+	/* this should not be changed as a potential MITM could occur */
 	curl_setopt($h, CURLOPT_SSL_VERIFYPEER, true);
 	curl_setopt($h, CURLOPT_SSL_VERIFYHOST, 2);
-	//curl_setopt($h, CURLOPT_CAINFO, getcwd().'/application/views/myTFH/sso.scl.utah.edu.pem');
 	curl_setopt($h, CURLOPT_RETURNTRANSFER, true);
 	$r=curl_exec($h);
 	if ((preg_match('/\_setToken\(\'\'\)\;/', $r))||(preg_match('/class=\"error\"/', $r))) {
