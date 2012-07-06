@@ -1,238 +1,458 @@
-Mon Apr 30 09:50:47 MDT 2012 - Removed debugging information from sessions stored procedures
+Thu Jul  5 11:23:02 MDT 2012 - Removed unnecessary CAPATH header option from
+                               cURL function. Modified comment to reflect best
+                               practice
+07/05/2012 11:23 AM
+ m vendors/CodeIgniter/auth.php
+
+Thu Jul  5 11:23:02 MDT 2012 - Removed unnecessary CAPATH header option from
+                               cURL function. Modified comment to reflect best
+                               practice
+Thu Jul  5 08:58:45 MDT 2012 - More documentation on setup
+07/05/2012 08:58 AM
+ m README.md
+
+Thu Jul  5 08:58:45 MDT 2012 - More documentation on setup
+Thu Jul  5 08:52:53 MDT 2012 - Added some documentaiton
+07/05/2012 08:52 AM
+ m README.md
+
+Thu Jul  5 08:52:53 MDT 2012 - Added some documentaiton
+Thu Jul  5 08:47:40 MDT 2012 - Updated CREDITS file
+07/05/2012 08:47 AM
+ m docs/CREDITS
+
+Thu Jul  5 08:47:40 MDT 2012 - Updated CREDITS file
+Thu Jul  5 08:46:16 MDT 2012 - Removed old auth.php:
+07/05/2012 08:46 AM
+ - auth.php
+
+Thu Jul  5 08:46:16 MDT 2012 - Removed old auth.php:
+Thu Jul  5 08:45:34 MDT 2012 - Updated CREDITS to reflect contributions and
+                               included library authors and licenses. Also
+                               added new vendors/CodeIgniter/auth.php as
+                               simplified implementation for 3rd party
+                               frameworks
+07/05/2012 08:45 AM
+ + vendors/CodeIgniter/auth.php
+
+Thu Jul  5 08:45:34 MDT 2012 - Updated CREDITS to reflect contributions and
+                               included library authors and licenses. Also
+                               added new vendors/CodeIgniter/auth.php as
+                               simplified implementation for 3rd party
+                               frameworks
+Tue Jun 26 03:45:13 MDT 2012 - Bug fix regarding refering application to IP(s)
+                               validation
+06/26/2012 03:45 AM
+ m models/model.applications.php
+
+Tue Jun 26 03:45:13 MDT 2012 - Bug fix regarding refering application to IP(s)
+                               validation
+Mon Jun 25 06:49:19 MDT 2012 - Missing .htaccess now present, oops
+06/25/2012 06:49 AM
+ + .htaccess
+
+Mon Jun 25 06:49:19 MDT 2012 - Missing .htaccess now present, oops
+Sat Jun 23 12:05:34 MDT 2012 - Removed unnecessary installation howto as the
+                               wizard should suffice
+06/23/2012 12:05 PM
+ - INSTALL.md
+
+Sat Jun 23 12:05:34 MDT 2012 - Removed unnecessary installation howto as the
+                               wizard should suffice
+Fri Jun 22 12:03:56 MDT 2012 - Updated readme
+06/22/2012 12:03 PM
+ m README.md
+
+Fri Jun 22 12:03:56 MDT 2012 - Updated readme
+Fri Jun 22 12:02:40 MDT 2012 - Removed old files no longer in use
+06/22/2012 12:02 PM
+ - config/configuration.php
+ - install/backups/02.02.2012.sql
+ - install/backups/02.24.2012.sql
+ - install/stored-functions/sf-shared.sql
+
+Fri Jun 22 12:02:40 MDT 2012 - Removed old files no longer in use
+Fri Jun 22 12:01:18 MDT 2012 - Global update on many things. =)
+06/22/2012 12:01 PM
+ m README.md
+ + config/configuration.php.example
+ m controllers/controller.dashboard.php
+ m controllers/controller.index.php
+ + controllers/controller.install.php
+ m index.php
+ + install.php
+ m install/schema/database-schema.sql
+ m install/stored-procedures/sp_authentication.sql
+ m install/stored-procedures/sp_configuration.sql
+ m install/stored-procedures/sp_configuration_access.sql
+ m install/stored-procedures/sp_configuration_applications.sql
+ m install/stored-procedures/sp_configuration_cnf.sql
+ m install/stored-procedures/sp_configuration_keys.sql
+ m install/stored-procedures/sp_logs.sql
+ m install/stored-procedures/sp_permissions.sql
+ m install/stored-procedures/sp_sessions.sql
+ m install/stored-procedures/sp_users.sql
+ m models/core/database/class.database.mysql.php
+ + models/core/encryption/class.encryption.hashes.php
+ m models/core/encryption/class.encryption.openssl.php
+ m models/model.access.php
+ m models/model.applications.php
+ m models/model.authentication.php
+ m models/model.install.php
+ m models/model.keyring.php
+ m models/model.libraries.php
+ m models/model.registry.php
+ m models/model.router.php
+ m models/model.users.php
+ m views/default/css/styles.css
+ m views/default/d-menu.tpl
+ m views/default/dashboard.access.tpl
+ m views/default/dashboard.applications.tpl
+ m views/default/dashboard.users.tpl
+ m views/default/install.tpl
+ m views/default/location.tpl
+ m views/default/login.tpl
+ m views/default/menu.tpl
+ m views/default/remote.tpl
+ + views/view.install.php
+ m views/view.remote.php
+
+Fri Jun 22 12:01:18 MDT 2012 - Global update on many things. =)
+Thu Jun 14 09:07:15 MDT 2012 - Removed application specific configuration
+                               settings
+06/14/2012 09:07 AM
+ m config/configuration.php
+
+Thu Jun 14 09:07:15 MDT 2012 - Removed application specific configuration
+                               settings
+Thu Jun 14 08:39:15 MDT 2012 - Working on installer howto still
+06/14/2012 08:39 AM
+ m INSTALL.md
+
+Thu Jun 14 08:39:15 MDT 2012 - Working on installer howto still
+Thu Jun 14 08:12:44 MDT 2012 - Added more information on re-configuring stored
+                               procedures & database schema prior to import.
+                               Also made pattern matching & replacements easier
+                               for each by creating hard coded attributes with
+                               specific syntax
+06/14/2012 08:12 AM
+ m INSTALL.md
+ m install/stored-procedures/sp_authentication.sql
+ m install/stored-procedures/sp_configuration.sql
+ m install/stored-procedures/sp_configuration_access.sql
+ m install/stored-procedures/sp_configuration_applications.sql
+ m install/stored-procedures/sp_configuration_cnf.sql
+ m install/stored-procedures/sp_configuration_keys.sql
+ m install/stored-procedures/sp_logs.sql
+ m install/stored-procedures/sp_permissions.sql
+ m install/stored-procedures/sp_sessions.sql
+ m install/stored-procedures/sp_users.sql
+
+Thu Jun 14 08:12:44 MDT 2012 - Added more information on re-configuring stored
+                               procedures & database schema prior to import.
+                               Also made pattern matching & replacements easier
+                               for each by creating hard coded attributes with
+                               specific syntax
+Thu Jun 14 07:22:51 MDT 2012 - Link modification for installation guide
+06/14/2012 07:22 AM
+ m README.md
+
+Thu Jun 14 07:22:51 MDT 2012 - Link modification for installation guide
+Thu Jun 14 07:22:01 MDT 2012 - Link modification for installation guide
+06/14/2012 07:22 AM
+ m README.md
+
+Thu Jun 14 07:22:01 MDT 2012 - Link modification for installation guide
+Thu Jun 14 07:20:53 MDT 2012 - Migrated installation guide into its own doc
+06/14/2012 07:20 AM
+ + INSTALL.md
+ m README.md
+
+Thu Jun 14 07:20:53 MDT 2012 - Migrated installation guide into its own doc
+Thu Jun 14 07:16:33 MDT 2012 - Installation notes
+06/14/2012 07:16 AM
+ m README.md
+
+Thu Jun 14 07:16:33 MDT 2012 - Installation notes
+Thu Jun 14 07:10:51 MDT 2012 - implementation notes
+06/14/2012 07:10 AM
+ m README.md
+
+Thu Jun 14 07:10:51 MDT 2012 - implementation notes
+
+Mon Apr 30 09:50:47 MDT 2012 - Removed debugging information from sessions
+                               stored procedures
 04/30/2012 09:50 AM
-m install/stored-procedures/sp_sessions.sql
+ m install/stored-procedures/sp_sessions.sql
 
-Mon Apr 30 09:50:47 MDT 2012 - Removed debugging information from sessions stored procedures
-Mon Apr 30 09:50:02 MDT 2012 - Bug with foreign key constraints on new user account keyring data
+Mon Apr 30 09:50:47 MDT 2012 - Removed debugging information from sessions
+                               stored procedures
+Mon Apr 30 09:50:02 MDT 2012 - Bug with foreign key constraints on new user
+                               account keyring data
 04/30/2012 09:50 AMm install/stored-procedures/sp_configuration_keys.sql
-m models/model.users.php
+ m models/model.users.php
 
-Mon Apr 30 09:50:02 MDT 2012 - Bug with foreign key constraints on new user account keyring data
-Mon Apr 30 09:44:12 MDT 2012 - Added detailed description of isolated per user hash process
+Mon Apr 30 09:50:02 MDT 2012 - Bug with foreign key constraints on new user
+                               account keyring data
+Mon Apr 30 09:44:12 MDT 2012 - Added detailed description of isolated per user
+                               hash process
 04/30/2012 09:44 AM
-m models/model.users.php
+ m models/model.users.php
 
-Mon Apr 30 09:44:12 MDT 2012 - Added detailed description of isolated per user hash process
-Mon Apr 30 09:42:08 MDT 2012 - Added necessary resource field necessary for permissions lookups etc.
+Mon Apr 30 09:44:12 MDT 2012 - Added detailed description of isolated per user
+                               hash process
+Mon Apr 30 09:42:08 MDT 2012 - Added necessary resource field necessary for
+                               permissions lookups etc.
 04/30/2012 09:42 AM
-m install/stored-procedures/sp_configuration_keys.sql
+ m install/stored-procedures/sp_configuration_keys.sql
 
-Mon Apr 30 09:42:08 MDT 2012 - Added necessary resource field necessary for permissions lookups etc.
-Mon Apr 30 09:39:27 MDT 2012 - Migrated current method of adding keys away from static site wide encryption keys to isolated per user encryption keys
+Mon Apr 30 09:42:08 MDT 2012 - Added necessary resource field necessary for
+                               permissions lookups etc.
+Mon Apr 30 09:39:27 MDT 2012 - Migrated current method of adding keys away from
+                               static site wide encryption keys to isolated per
+                               user encryption keys
 04/30/2012 09:39 AM
-m models/model.users.php
+ m models/model.users.php
 
-Mon Apr 30 09:39:27 MDT 2012 - Migrated current method of adding keys away from static site wide encryption keys to isolated per user encryption keys
-Mon Apr 30 08:44:48 MDT 2012 - Restructuring database tables for keys and user accounts to accomidate encrypted contents and truncation
+Mon Apr 30 09:39:27 MDT 2012 - Migrated current method of adding keys away from
+                               static site wide encryption keys to isolated per
+                               user encryption keys
+Mon Apr 30 08:44:48 MDT 2012 - Restructuring database tables for keys and user
+                               accounts to accomidate encrypted contents
+                               and truncation
 04/30/2012 08:44 AM
-m install/schema/database-schema.sql
+ m install/schema/database-schema.sql
 
-Mon Apr 30 08:44:48 MDT 2012 - Restructuring database tables for keys and user accounts to accomidate encrypted contents and truncation
+Mon Apr 30 08:44:48 MDT 2012 - Restructuring database tables for keys and user
+                               accounts to accomidate encrypted contents and
+                               truncation
 Merge branch 'master', remote branch 'origin/master'
 04/30/2012 07:16 AM
 
 Merge branch 'master', remote branch 'origin/master'
-Fri Apr 27 11:58:30 MDT 2012 - Bug with return value of stored procedure to add/update keyring data per user
+Fri Apr 27 11:58:30 MDT 2012 - Bug with return value of stored procedure to
+                               add/update keyring data per user
 04/27/2012 11:58 AM
-m install/stored-procedures/sp_configuration_keys.sql
-m models/model.users.php
+ m install/stored-procedures/sp_configuration_keys.sql
+ m models/model.users.php
 
-Fri Apr 27 11:58:30 MDT 2012 - Bug with return value of stored procedure to add/update keyring data per user
+Fri Apr 27 11:58:30 MDT 2012 - Bug with return value of stored procedure to
+                               add/update keyring data per user
 Fri Apr 27 11:53:22 MDT 2012 - Almost completed add user functionality
 04/27/2012 11:53 AM
-m models/model.users.php
+ m models/model.users.php
 
 Fri Apr 27 11:53:22 MDT 2012 - Almost completed add user functionality
-Fri Apr 27 11:26:05 MDT 2012 - Resolved problem with new keyring additions regarding stored procedure use
+Fri Apr 27 11:26:05 MDT 2012 - Resolved problem with new keyring additions
+                               regarding stored procedure use
 04/27/2012 11:26 AM
-m install/stored-procedures/sp_configuration_keys.sql
+ m install/stored-procedures/sp_configuration_keys.sql
 
-Fri Apr 27 11:26:05 MDT 2012 - Resolved problem with new keyring additions regarding stored procedure use
+Fri Apr 27 11:26:05 MDT 2012 - Resolved problem with new keyring additions
+                               regarding stored procedure use
 Merge branch 'master', remote branch 'origin/master'
 04/27/2012 03:36 AM
-m install/schema/database-schema.sql
-m install/stored-procedures/sp_configuration_keys.sql
-m install/stored-procedures/sp_sessions.sql
-m models/core/sessions/class.sessions.databases.php
-m models/model.keyring.php
-m models/model.users.php
+ m install/schema/database-schema.sql
+ m install/stored-procedures/sp_configuration_keys.sql
+ m install/stored-procedures/sp_sessions.sql
+ m models/core/sessions/class.sessions.databases.php
+ m models/model.keyring.php
+ m models/model.users.php
 
 Merge branch 'master', remote branch 'origin/master'
 Thu Apr 26 13:05:21 MDT 2012 - EOD because punked is punked
 04/26/2012 01:05 PM
-m install/stored-procedures/sp_configuration_keys.sql
-m models/model.users.php
+ m install/stored-procedures/sp_configuration_keys.sql
+ m models/model.users.php
 
 Thu Apr 26 13:05:21 MDT 2012 - EOD because punked is punked
-Thu Apr 26 10:48:59 MDT 2012 - Resolved bug regarding updating encrypted session data
+Thu Apr 26 10:48:59 MDT 2012 - Resolved bug regarding updating encrypted
+                               session data
 04/26/2012 10:48 AM
-m install/schema/database-schema.sql
-m install/stored-procedures/sp_sessions.sql
-m models/core/sessions/class.sessions.databases.php
-m models/model.keyring.php
-m models/model.users.php
+ m install/schema/database-schema.sql
+ m install/stored-procedures/sp_sessions.sql
+ m models/core/sessions/class.sessions.databases.php
+ m models/model.keyring.php
+ m models/model.users.php
 
-Thu Apr 26 10:48:59 MDT 2012 - Resolved bug regarding updating encrypted session data
+Thu Apr 26 10:48:59 MDT 2012 - Resolved bug regarding updating encrypted session
+                               data
 Merge branch 'master', remote branch 'origin/master'
 04/26/2012 03:37 AM
 Merge branch 'master', remote branch 'origin/master'
-Wed Apr 25 14:23:24 MDT 2012 - EOD catchall. Working on bugs with current database session abstraction layer within the stored procedures to add/update existing data
+Wed Apr 25 14:23:24 MDT 2012 - EOD catchall. Working on bugs with current
+                               database session abstraction layer within the
+                               stored procedures to add/update existing data
 04/25/2012 02:23 PM
-m install/stored-procedures/sp_sessions.sql
-m models/core/sessions/class.sessions.databases.php
-m models/model.users.php
-m views/default/dashboard.users.tpl
-m views/default/js/jQuery.pidCrypt.js
-m views/default/js/jQuery.pidCrypt.min.js
+ m install/stored-procedures/sp_sessions.sql
+ m models/core/sessions/class.sessions.databases.php
+ m models/model.users.php
+ m views/default/dashboard.users.tpl
+ m views/default/js/jQuery.pidCrypt.js
+ m views/default/js/jQuery.pidCrypt.min.js
 
-Wed Apr 25 14:23:24 MDT 2012 - EOD catchall. Working on bugs with current database session abstraction layer within the stored procedures to add/update existing data
-Wed Apr 25 12:03:39 MDT 2012 - Migrated new changes to jQuery.pidCrypt into project
+Wed Apr 25 14:23:24 MDT 2012 - EOD catchall. Working on bugs with current
+                               database session abstraction layer within the
+                               stored procedures to add/update existing data
+Wed Apr 25 12:03:39 MDT 2012 - Migrated new changes to jQuery.pidCrypt into
+                               project
 04/25/2012 12:03 PM
-m install/schema/database-schema.sql
-m views/default/js/jQuery.pidCrypt.min.js
+ m install/schema/database-schema.sql
+ m views/default/js/jQuery.pidCrypt.min.js
 
-Wed Apr 25 12:03:39 MDT 2012 - Migrated new changes to jQuery.pidCrypt into project
+Wed Apr 25 12:03:39 MDT 2012 - Migrated new changes to jQuery.pidCrypt into
+                               project
 Fri Apr 20 18:20:39 MDT 2012 - EOD catchall changes
 04/20/2012 06:20 PM
-m install/stored-procedures/sp_configuration_keys.sql
+ m install/stored-procedures/sp_configuration_keys.sql
 
 Fri Apr 20 18:20:39 MDT 2012 - EOD catchall changes
-Fri Apr 20 17:39:08 MDT 2012 - Stored procedure to add or update existing user accounts key pairs is in progress. Right now the AES decryption is not allowing for insert/update functionality
+Fri Apr 20 17:39:08 MDT 2012 - Stored procedure to add or update existing user
+                               accounts key pairs is in progress. Right now the
+                               AES decryption is not allowing for insert/update
+                               functionality
 04/20/2012 05:39 PM
-m install/stored-procedures/sp_configuration_keys.sql
-m models/model.users.php
-m models/model.validation.php
+ m install/stored-procedures/sp_configuration_keys.sql
+ m models/model.users.php
+ m models/model.validation.php
 
-Fri Apr 20 17:39:08 MDT 2012 - Stored procedure to add or update existing user accounts key pairs is in progress. Right now the AES decryption is not allowing for insert/update functionality
-Fri Apr 20 14:06:53 MDT 2012 - Added error checking onto end of helpers for adding keys and users
+Fri Apr 20 17:39:08 MDT 2012 - Stored procedure to add or update existing user
+                               accounts key pairs is in progress. Right now the
+                               AES decryption is not allowing for insert/update
+                               functionality
+Fri Apr 20 14:06:53 MDT 2012 - Added error checking onto end of helpers for
+                               adding keys and users
 04/20/2012 02:06 PM
-m models/model.users.php
+ m models/model.users.php
 
-Fri Apr 20 14:06:53 MDT 2012 - Added error checking onto end of helpers for adding keys and users
-Fri Apr 20 13:58:38 MDT 2012 - Added affected rows on keys and users stored procedures for success/fail checks
+Fri Apr 20 14:06:53 MDT 2012 - Added error checking onto end of helpers for
+                               adding keys and users
+Fri Apr 20 13:58:38 MDT 2012 - Added affected rows on keys and users stored
+                               procedures for success/fail checks
 04/20/2012 01:58 PM
-m install/stored-procedures/sp_configuration_keys.sql
+ m install/stored-procedures/sp_configuration_keys.sql
 
-Fri Apr 20 13:58:38 MDT 2012 - Added affected rows on keys and users stored procedures for success/fail checks
+Fri Apr 20 13:58:38 MDT 2012 - Added affected rows on keys and users stored
+                               procedures for success/fail checks
 
 Fri Feb 24 16:55:33 MST 2012 - Renamed installation controller
 02/24/2012 04:55 PM
-+ controllers/controller.installation.php
+ + controllers/controller.installation.php
 
 Fri Feb 24 16:55:33 MST 2012 - Renamed installation controller
 Fri Feb 24 14:10:06 MST 2012 - Template to handle installation wizard
 02/24/2012 02:10 PM
-+ views/default/install.tpl
+ + views/default/install.tpl
 
 Fri Feb 24 14:10:06 MST 2012 - Template to handle installation wizard
 Fri Feb 24 14:09:43 MST 2012 - Framework for installation view
 02/24/2012 02:09 PM
-+ views/view.installation.php
+ + views/view.installation.php
 
 Fri Feb 24 14:09:43 MST 2012 - Framework for installation view
 Fri Feb 24 14:08:56 MST 2012 - Framework for installation controller
 02/24/2012 02:08 PM
-+ controllers/controller.install.php
+ + controllers/controller.install.php
 
 Fri Feb 24 14:08:56 MST 2012 - Framework for installation controller
 Fri Feb 24 14:00:23 MST 2012 - Removed commented line on redirects
 02/24/2012 02:00 PM
-m .htaccess
+ m .htaccess
 
 Fri Feb 24 14:00:23 MST 2012 - Removed commented line on redirects
 Fri Feb 24 13:59:23 MST 2012 - Small typo
 02/24/2012 01:59 PM
-m config/configuration.php
+ m config/configuration.php
 
 Fri Feb 24 13:59:23 MST 2012 - Small typo
 Fri Feb 24 13:58:10 MST 2012 - Trivial update
 02/24/2012 01:58 PM
-m controllers/controller.proxy.php
+ m controllers/controller.proxy.php
 
 Fri Feb 24 13:58:10 MST 2012 - Trivial update
 Fri Feb 24 13:56:57 MST 2012 - Moved installer due to routing
 02/24/2012 01:56 PM
-- install/install.php
+ - install/install.php
 
 Fri Feb 24 13:56:57 MST 2012 - Moved installer due to routing
 Fri Feb 24 13:55:38 MST 2012 - Added information on current features
 02/24/2012 01:55 PM
-m docs/ROADMAP
+ m docs/ROADMAP
 
 Fri Feb 24 13:55:38 MST 2012 - Added information on current features
 Fri Feb 24 12:43:02 MST 2012 - Added required documentation regarding
                                changelog, credits, installation, license,
                                readme, & roadmap
 02/24/2012 12:43 PM
-+ docs/CHANGELOG
-+ docs/CREDITS
-+ docs/INSTALL
-+ docs/LICENSE
-+ docs/README
-+ docs/ROADMAP
+ + docs/CHANGELOG
+ + docs/CREDITS
+ +  docs/INSTALL
+ + docs/LICENSE
+ + docs/README
+ + docs/ROADMAP
 
 Fri Feb 24 12:14:14 MST 2012 - Organization and housekeeping
 02/24/2012 12:14 PM
-- install/database-schema.sql
+ - install/database-schema.sql
 
 Fri Feb 24 12:14:14 MST 2012 - Organization and housekeeping
 Fri Feb 24 12:13:41 MST 2012 - Organization and housekeeping
 02/24/2012 12:13 PM
-- install/02.02.2012.sql
-- install/sf-shared.sql
-- install/sp_authentication.sql
-- install/sp_configuration.sql
-- install/sp_configuration_cnf.sql
-- install/sp_configuration_keys.sql
-- install/sp_logs.sql
-- install/sp_sessions.sql
-- install/sp_users.sql
-- install/stored-procedures.sql
+ - install/02.02.2012.sql
+ - install/sf-shared.sql
+ - install/sp_authentication.sql
+ - install/sp_configuration.sql
+ - install/sp_configuration_cnf.sql
+ - install/sp_configuration_keys.sql
+ - install/sp_logs.sql
+ - install/sp_sessions.sql
+ - install/sp_users.sql
+ - install/stored-procedures.sql
 
 Fri Feb 24 12:13:41 MST 2012 - Organization and housekeeping
 Fri Feb 24 12:05:34 MST 2012 - Backup of current schema and contents
 02/24/2012 12:05 PM
-+ install/backups/02.24.2012.sql
+ + install/backups/02.24.2012.sql
 
 Fri Feb 24 12:05:34 MST 2012 - Backup of current schema and contents
 Fri Feb 24 12:04:21 MST 2012 - Working on an installer to make setup easier
 02/24/2012 12:04 PM
-+ install/backups/02.02.2012.sql
-+ install/install.php
-+ install/schema/database-schema.sql
-+ install/stored-functions/sf-shared.sql
-+ install/stored-procedures/sp_authentication.sql
-+ install/stored-procedures/sp_configuration.sql
-+ install/stored-procedures/sp_configuration_cnf.sql
-+ install/stored-procedures/sp_configuration_keys.sql
-+ install/stored-procedures/sp_logs.sql
-+ install/stored-procedures/sp_sessions.sql
-+ install/stored-procedures/sp_users.sql
-+ install/stored-procedures/stored-procedures.sql
+ + install/backups/02.02.2012.sql
+ + install/install.php
+ + install/schema/database-schema.sql
+ + install/stored-functions/sf-shared.sql
+ + install/stored-procedures/sp_authentication.sql
+ + install/stored-procedures/sp_configuration.sql
+ + install/stored-procedures/sp_configuration_cnf.sql
+ + install/stored-procedures/sp_configuration_keys.sql
+ + install/stored-procedures/sp_logs.sql
+ + install/stored-procedures/sp_sessions.sql
+ + install/stored-procedures/sp_users.sql
+ + install/stored-procedures/stored-procedures.sql
 
 Fri Feb 24 12:04:21 MST 2012 - Working on an installer to make setup easier
 Fri Feb 24 10:35:46 MST 2012 - Token generation routines
 02/24/2012 10:35 AM
-m models/model.authentication.php
+ m models/model.authentication.php
 
 Fri Feb 24 10:35:46 MST 2012 - Token generation routines
 Fri Feb 24 10:35:10 MST 2012 - Added new SP to handle retrieval of
                                authenticated users access level and
                                group membership
 02/24/2012 10:35 AM
-m install/sp_authentication.sql
+ m install/sp_authentication.sql
 
 Fri Feb 24 10:35:10 MST 2012 - Added new SP to handle retrieval of
                                authenticated users access level and
                                group membership
 Merge branch 'master', remote branch 'origin/master'
 02/24/2012 09:49 AM
-m models/model.authentication.php
+ m models/model.authentication.php
 
 Merge branch 'master', remote branch 'origin/master'
 Thu Feb 23 06:41:33 MST 2012 - Catch exception handler added
 02/23/2012 06:41 AM
-m models/model.authentication.php
+ m models/model.authentication.php
 
 Thu Feb 23 06:41:33 MST 2012 - Catch exception handler added
 Merge branch 'master', remote branch 'origin/master'
@@ -241,7 +461,7 @@ Merge branch 'master', remote branch 'origin/master'
 Wed Feb 22 13:44:58 MST 2012 - Working on __genToken() to handle
                                CSRF and other spoofing techniques
 02/22/2012 01:44 PM
-m models/model.authentication.php
+ m models/model.authentication.php
 
 Wed Feb 22 13:44:58 MST 2012 - Working on __genToken() to handl
                                CSRF and other spoofing techniques
@@ -249,7 +469,7 @@ Wed Feb 22 13:17:53 MST 2012 - Moved token registration out of
                                primary authentication function to
                                its own private method
 02/22/2012 01:17 PM
-m models/model.authentication.php
+ m models/model.authentication.php
 
 Wed Feb 22 13:17:53 MST 2012 - Moved token registration out of
                                primary authentication function to
@@ -258,25 +478,25 @@ Wed Feb 22 13:08:17 MST 2012 - Moved token registration out of
                                primary authentication function to
                                its own private method
 02/22/2012 01:08 PM
-m models/model.authentication.php
+ m models/model.authentication.php
 
 Wed Feb 22 13:08:17 MST 2012 - Moved token registration
                                out of primary authentication
                                function to its own private method
 Wed Feb 22 12:40:03 MST 2012 - Catch all
 02/22/2012 12:40 PM
-m install/stored-procedures.sql
-m models/model.keyring.php
+ m install/stored-procedures.sql
+ m models/model.keyring.php
 
 Wed Feb 22 12:40:03 MST 2012 - Catch all
 Wed Feb 22 12:39:40 MST 2012 - Progress on primary authentication
 02/22/2012 12:39 PM
-m models/model.authentication.php
+ m models/model.authentication.php
 
 Wed Feb 22 12:39:40 MST 2012 - Progress on primary authentication
 Wed Feb 22 12:39:05 MST 2012 - SP for handling authentication tokens
 02/22/2012 12:39 PM
-m install/sp_users.sql
+ m install/sp_users.sql
 
 Wed Feb 22 12:39:05 MST 2012 - SP for handling authentication tokens
 Merge branch 'master', remote branch 'origin/master'
@@ -286,7 +506,7 @@ Fri Feb 17 20:15:22 MST 2012 - Moved from /dev/urandom to /dev/random
                                for entropy due to information provided
                                at http://marc.info/?l=openssl-dev&m=132958101817902&w=2
 02/17/2012 08:15 PM
-m models/core/encryption/class.encryption.openssl.php
+ m models/core/encryption/class.encryption.openssl.php
 
 Fri Feb 17 20:15:22 MST 2012 - Moved from /dev/urandom to /dev/random
                                for entropy due to information provided
@@ -297,13 +517,13 @@ Merge branch 'master', remote branch 'origin/master'
 Thu Feb 16 13:06:49 MST 2012 - Added new bcrypt class and working on
                                authentication
 02/16/2012 01:06 PM
-m install/sp_authentication.sql
-+ models/core/encryption/class.encryption.bcrypt.php
-m models/model.authentication.php
+ m install/sp_authentication.sql
+ + models/core/encryption/class.encryption.bcrypt.php
+ m models/model.authentication.php
 
 Thu Feb 16 13:06:49 MST 2012 - Added new bcrypt class and working on
                                authentication
 Thu Feb 16 08:07:23 MST 2012 - Refactoring mcrypt encryption class to
                                assist handling blowfish hashes
 02/16/2012 08:07 AM
-m models/core/encryption/class.encryption.mcrypt.php
+ m models/core/encryption/class.encryption.mcrypt.php
