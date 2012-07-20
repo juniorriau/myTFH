@@ -324,6 +324,23 @@ class users
 				$x[$key] = $this->registry->keyring->ssl->privDenc($value, $_SESSION[$this->registry->libs->_getRealIPv4()]['privateKey'], $_SESSION[$this->registry->libs->_getRealIPv4()]['password']);
 			}
 		}
+		return ($this->__dHlpr($obj, $x)) ? $x : array('error'=>'Decryption of submitted form data failed');
+	}
+
+	/**
+	 *! @function __dHlpr
+	 *  @abstract Compares original key/value with decrypted key/value to ensure no missing data
+	 */
+	private function __dHlpr($orig, $dec)
+	{
+		$x = true;
+		if (is_array($dec)) {
+			foreach($dec as $key => $value) {
+				if ((array_key_exists($key, $orig))&&(empty($value))) {
+					return false;
+				}
+			}
+		}
 		return $x;
 	}
 
