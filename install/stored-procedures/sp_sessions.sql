@@ -30,16 +30,7 @@ BEGIN
  ELSE
   INSERT INTO `sessions` (`session_id`,`session_data`,`session_expire`,`session_agent`,`session_ip`,`session_referer`) VALUES (session_id, HEX(AES_ENCRYPT(session_data, SHA1(sKey))), session_expire, session_agent, session_ip, session_referer) ON DUPLICATE KEY UPDATE `session_id`=session_id, `session_data`=HEX(AES_ENCRYPT(session_data, SHA1(sKey))), `session_expire`=session_expire;
  END IF;
- SELECT x;
-END//
-
-DROP PROCEDURE IF EXISTS Session_Add//
-CREATE DEFINER='[dbUser]'@'[dbHost]' PROCEDURE Session_Add(IN `session_id` VARCHAR(64), `session_data` LONGTEXT, `session_expire` INT(10), `session_agent` VARCHAR(64), `session_ip` VARCHAR(64), `session_referer` VARCHAR(64), IN `sKey` LONGTEXT)
- DETERMINISTIC
- SQL SECURITY INVOKER
- COMMENT 'Add or update existing session id & data'
-BEGIN
- INSERT INTO `sessions` (`session_id`,`session_data`,`session_expire`,`session_agent`,`session_ip`,`session_referer`) VALUES (session_id, HEX(AES_ENCRYPT(session_data, SHA1(sKey))), session_expire, session_agent, session_ip, session_referer);
+ SELECT ROW_COUNT() AS affected;
 END//
 
 DROP PROCEDURE IF EXISTS Session_Destroy//
