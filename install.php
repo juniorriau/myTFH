@@ -1,5 +1,7 @@
 <?php
 
+//error_reporting(0);
+
 /* define application path */
 define('__SITE', realpath(dirname(__FILE__)));
 

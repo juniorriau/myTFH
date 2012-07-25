@@ -259,9 +259,17 @@ class libraries {
 	 */
 	public function geolocation($ip)
 	{
-		$opts = array('http'=>array('method'=>'GET','header'=>'Accept-language: en\r\n'));
+		$opts = array('http'=>array('method'=>'GET','header'=>'Accept-language: en\r\nConnection: close\r\n'));
 		$context = stream_context_create($opts);
 		$ex = unserialize(file_get_contents('http://www.geoplugin.net/php.gp?ip='.$ip, false, $context));
+		if (empty($ex)) {
+			$h=curl_init();
+			curl_setopt($h, CURLOPT_URL, 'http://www.geoplugin.net/php.gp?ip='.$ip);
+			curl_setopt($h, CURLOPT_HEADER, false);
+			curl_setopt($h, CURLOPT_RETURNTRANSFER, 1);
+			$ex=unserialize(curl_exec($h));
+			curl_close($h);
+		}
 		return $ex;
 	}
 

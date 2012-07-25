@@ -91,12 +91,13 @@ class remoteView
 			$x = authentication::instance($this->registry)->__reauth($_SESSION[getenv('HTTP_CLIENT_IP')]['token'], $_SERVER['HTTP_X_TOKEN']);
 		}
 
-		$x = $this->_message($x);
+		$t = $this->_message($x);
 
 		$this->registry->tpl->assign('templates', $path.'/'.$this->registry->tpl->strTemplateDir, null, null, null);
 		$this->registry->tpl->assign('server', $proto.$_SERVER['HTTP_HOST'].$vm, null, null, null);
 		$this->registry->tpl->assign('token', $_SESSION[$this->registry->libs->_getRealIPv4()]['csrf'], null, null, null);
-		$this->registry->tpl->assign('message', $x, null, null, null);
+		$this->registry->tpl->assign('aToken', $x['token'], null, null, null);
+		$this->registry->tpl->assign('message', $t, null, null, null);
 		$this->registry->tpl->display('remote.tpl', true, null, $this->registry->libs->_getRealIPv4());
 	}
 
@@ -104,24 +105,25 @@ class remoteView
 	 *! @function _message
 	 *  @abstract Format any existing messages
 	 */
-	private function _message($array) {
+	private function _message($array)
+	{
 		$x='';
 		if (count($array)>0){
 			switch($array){
-				case array_key_exists('success', $array):
+				case (array_key_exists('success', $array)&&(!empty($array['success']))):
 					$x = '<div class="success">'.$array['success'].'</div>';
 					break;
-				case array_key_exists('error', $array):
+				case (array_key_exists('error', $array)&&(!empty($array['error']))):
 					$x = '<div class="error">'.$array['error'].'</div>';
 					break;
-				case array_key_exists('warning', $array):
+				case (array_key_exists('warning', $array)&&(!empty($array['warning']))):
 					$x = '<div class="warning">'.$array['warning'].'</div>';
 					break;
-				case array_key_exists('info', $array):
+				case (array_key_exists('info', $array)&&(!empty($array['info']))):
 					$x = '<div class="info">'.$array['info'].'</div>';
 					break;
 				default:
-					$x = $x;
+					$x = '';
 					break;
 			}
 		}

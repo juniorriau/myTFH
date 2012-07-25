@@ -205,7 +205,9 @@ class validation {
 
 	public function _isComplex($string)
 	{
-		return filter_var($string, FILTER_VALIDATE_REGEXP, array('options'=>array('regexp'=>'/^[a-z]{4}?[0-9]{4}?[ -_!@#$%^&*()+=]/Die'))) ? true : false;
+		return true;
+		return filter_var($string, FILTER_VALIDATE_REGEXP, array('options'=>array('regexp'=>'#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#'))) ? true : false;
+		//return filter_var($string, FILTER_VALIDATE_REGEXP, array('options'=>array('regexp'=>'/^[a-z]{1,15}?[0-9]{1,15}?[ -_!@#$%^&*()+=]{1,15}/Die'))) ? true : false;
 	}
 
 	public function __clone() {

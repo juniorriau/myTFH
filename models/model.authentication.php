@@ -60,7 +60,7 @@ class authentication
 	 *  @param registry array - Global array of class objects
 	 */
 	private function __construct($registry)
-	{	
+	{
 		$this->registry = $registry;
 		if (!$this->__setup($registry)){
 			exit(array('Error'=>'Necessary keys are missing, cannot continue'));
@@ -199,6 +199,8 @@ class authentication
 				$this->pass = hashes::init($this->registry)->_do($creds['password'], hashes::init($this->registry)->_do($this->registry->opts['dbKey']));
 				$this->salt = $this->registry->libs->_16($this->pass);
 
+				/* check to see if this user has a token first */
+
 				try{
 					$sql = sprintf('CALL Auth_CheckUser("%s", "%s", "%s")', $this->registry->db->sanitize($creds['email']), $this->registry->db->sanitize($this->pass), $this->registry->db->sanitize($this->pass));
 					$r = $this->registry->db->query($sql);
@@ -241,7 +243,7 @@ class authentication
 
 		if (empty($token)){
 			$this->__nuke();
-			return false;
+			return array('error'=>'No authentication token exists for this client');
 		}
 
 		if ((!empty($token))&&(!empty($hash))) {
@@ -259,7 +261,7 @@ class authentication
 		}
 
 		if ($this->__timeout($a[6], $this->registry->opts['timeout'])){
-			$this->__nuke(true);
+			//$this->__nuke(true);
 			return array('error'=>'The authenticated session has timed out, please re-authenticate');
 		}
 
@@ -538,7 +540,7 @@ class authentication
 	private function __addBlock($ip)
 	{
 		try{
-			$sql = sprintf('CALL Configuration_access_add("%s", "%s", "%s")',	
+			$sql = sprintf('CALL Configuration_access_add("%s", "%s", "%s")',
 							$this->registry->db->sanitize($ip),
 							$this->registry->db->sanitize($ip),
 						    $this->registry->db->sanitize(hashes::init($this->registry)->_do($this->registry->opts['dbKey'])));
@@ -556,17 +558,24 @@ class authentication
 	 */
 	private function __nuke($x=false)
 	{
+		$c = $_SESSION[$this->registry->libs->_getRealIPv4()]['count'];
+		$x = $this->__decode($_SESSION[$this->registry->libs->_getRealIPv4()]['token']);
+
+		unset($_SESSION[$this->registry->libs->_getRealIPv4()]);
+
 		if ($x){
-			if ($this->__countLogins($_SESSION[$this->registry->libs->_getRealIPv4()]['count'], $this->registry->opts['flogin'])) {
+			if ($this->__countLogins($c, $this->registry->opts['flogin'])) {
 				$this->__addBlock($this->registry->libs->_getRealIPv4());
 			} else {
-				$_SESSION[$this->registry->libs->_getRealIPv4()]['count']++;
+				$c++;
 			}
 		}
 
-		$x = $this->__decode($_SESSION[$this->registry->libs->_getRealIPv4()]['token']);
+		$_SESSION[$this->registry->libs->_getRealIPv4()]['count'] = $c;
+
+		$x['signature'] = '';
+
 		$this->__register($x);
-		unset($_SESSION[$this->registry->libs->_getRealIPv4()]['token']);
 		return;
 	}
 }

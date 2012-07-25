@@ -95,7 +95,7 @@ class hashes
 	 */
 	private function _hash($string, $salt=null)
 	{
-		return (CRYPT_BLOWFISH===1) ? (!empty($salt)) ? crypt($string, "\$2a\$07\$".substr($salt, 0, CRYPT_SALT_LENGTH)) : crypt($string, $this->_salt("\$2a\$07\$".substr($string, 0, CRYPT_SALT_LENGTH))) : false;
+		return (CRYPT_BLOWFISH===1) ? (!empty($salt)) ? crypt($string, "\$2y\$12\$".substr($salt, 0, CRYPT_SALT_LENGTH)) : crypt($string, $this->_salt("\$2y\$12\$".substr($string, 0, CRYPT_SALT_LENGTH))) : false;
 	}
 
 	/**
@@ -122,3 +122,4 @@ class hashes
 		return $h;
 	}
 }
+?>

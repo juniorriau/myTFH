@@ -177,7 +177,7 @@ class manageApplications
 	{
 		$this->registry = $registry;
 	}
-	
+
 	/**
 	 *! @function __do
 	 *  @abstract Determines action and acts accordingly
@@ -187,6 +187,10 @@ class manageApplications
 		$x = false;
 
 		$d = $this->__decrypt($obj);
+		if (array_key_exists('error', $d)) {
+			return $d;
+		}
+
 		$a = $d['do'];
 		unset($d['do']);
 
@@ -239,7 +243,7 @@ class manageApplications
 		if (!$data['ip']) return array('error'=>'Could not obtain DNS entry for associated URL');
 
 		try{
-			$sql = sprintf('CALL Configuration_applications_add("%s", "%s", "%s", "%s")',	
+			$sql = sprintf('CALL Configuration_applications_add("%s", "%s", "%s", "%s")',
 							$this->registry->db->sanitize($data['application']),
 							$this->registry->db->sanitize($data['url']),
 							$this->registry->db->sanitize($data['ip']),
@@ -262,6 +266,23 @@ class manageApplications
 			$x = array();
 			foreach($obj as $key => $value) {
 				$x[$key] = $this->registry->keyring->ssl->privDenc($value, $_SESSION[$this->registry->libs->_getRealIPv4()]['privateKey'], $_SESSION[$this->registry->libs->_getRealIPv4()]['password']);
+			}
+		}
+		return ($this->__dHlpr($obj, $x)) ? $x : array('error'=>'Decryption of submitted form data failed');
+	}
+
+	/**
+	 *! @function __dHlpr
+	 *  @abstract Compares original key/value with decrypted key/value to ensure no missing data
+	 */
+	private function __dHlpr($orig, $dec)
+	{
+		$x = true;
+		if (is_array($dec)) {
+			foreach($dec as $key => $value) {
+				if ((array_key_exists($key, $orig))&&(empty($value))) {
+					return false;
+				}
 			}
 		}
 		return $x;

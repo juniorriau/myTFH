@@ -64,6 +64,7 @@ class dbSession
 	 */
 	public function __construct($configuration, $opts)
 	{
+		//echo '<b>CURRENT:</b>'.session_id().'<pre>'; print_r($_SESSION); echo '</pre>';
 		if ((class_exists('dbConn'))||(is_object($opts))) {
 			$this->dbKey = $configuration['db-key'];
 			if (is_object($opts->db)) $this->dbconn = $opts->db;
@@ -141,6 +142,7 @@ class dbSession
 			try{
 				$sql = $query = sprintf('CALL Session_Search("%s", "%s")', $this->dbconn->sanitize($id), $this->dbconn->sanitize($this->dbKey));
 				$result = $this->dbconn->query($sql);
+				echo '<b>READ:</b><pre>'; print_r($sql); echo '</pre>';
 			} catch(Exception $e){
 				// error handling
 			}
@@ -163,8 +165,8 @@ class dbSession
 			if ((count($e)>0) && (!empty($e['session_data']))) {
 				$data = $this->sanitizeout($e['session_data']).$data;
 			}
-
 			$x = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : $this->_path();
+
 			try{
 				$sql = sprintf('CALL Session_Add("%s", "%s", "%d", "%s", "%s", "%s", "%s")',
 								$this->dbconn->sanitize($id), $this->sanitizein($data),
@@ -174,6 +176,7 @@ class dbSession
 								$this->dbconn->sanitize($x),
 								$this->dbconn->sanitize($this->dbKey));
 				$r = $this->dbconn->query($sql);
+				echo '<b>WRITE:</b><pre>'; print_r($sql); echo '</pre>';
 			} catch(Exception $e){
 				// error handling
 			}
@@ -202,6 +205,7 @@ class dbSession
 			try{
 				$sql = sprintf('CALL Session_destroy("%s")', $this->dbconn->sanitize($id));
 				$r = $this->dbconn->query($sql);
+				echo '<b>DESTROY:</b><pre>'; print_r($sql); echo '</pre>';
 			} catch(Exception $e){
 				// error handling
 			}
@@ -292,7 +296,9 @@ class dbSession
 	{
 		if (isset($timeout)) {
 			$sql = sprintf('CALL Session_Timeout("%d")', time() - $timeout);
+			echo $sql;
 			$r = $this->dbconn->query($sql);
+			echo '<b>GC:</b><pre>'; print_r($sql); echo '</pre>';
 			return ((is_resource($r)) && ($this->dbconn->affected() > 0)) ? true : false;
 		}
 		return false;

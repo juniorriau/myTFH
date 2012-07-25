@@ -218,7 +218,7 @@ DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE IF NOT EXISTS `sessions` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `session_id` varchar(64) NOT NULL,
-  `session_data` longtext,
+  `session_data` longtext NOT NULL,
   `session_expire` int(10) NOT NULL,
   `session_agent` longtext NOT NULL,
   `session_ip` longtext NOT NULL,

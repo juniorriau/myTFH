@@ -4,6 +4,7 @@
 <script>
 var $j = jQuery.noConflict();
 $j(document).ready(function(){
+ _setToken('{$aToken}');
  $j('#auth').pidCrypt({appID:'{$token}',callback:function(){_message(this);_redirect(this);},preCallback:function(){_load();},errCallback:function(){_error();}});
 });
 </script>
@@ -12,8 +13,8 @@ $j(document).ready(function(){
  <p>Please provide username & password</p>
  <div id="message">{$message}</div>
  <form id="auth" name="authenticate" method="post" action="{$server}/proxy/authenticate">
-  <label for="email">Email: </label>
-   <input type="email" id="email" name="email" value="" placeholder="Enter email address" required="required" /><span class="required">*</span>
+  <label for="email">Username: </label>
+   <input type="text" id="email" name="email" value="" placeholder="Enter email address" required="required" /><span class="required">*</span>
   <label for="password">Password: </label>
    <input type="password" id="password" name="password" value="" placeholder="Enter passphrase" required="required" /><span class="required">*</span>
   <input type="submit" value="Authenticate" id="submit-button" />

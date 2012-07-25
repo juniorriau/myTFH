@@ -15,7 +15,7 @@ $uid = _uuid();
 $proto = (!empty($_SERVER['HTTPS'])&&$_SERVER['HTTPS']!=='off'||$_SERVER['SERVER_PORT']==443) ? 'https://' : 'http://';
 
 /**
- * @array $opt Array of header options
+ * @string $referer Manually sets the origin for the cURL request
  */
 $referer = $proto.$_SERVER['HTTP_HOST'];
 
