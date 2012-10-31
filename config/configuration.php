@@ -5,7 +5,7 @@ if (!defined('__SITE')) exit('No direct calls please...');
 /* Database configuration settings */
 $settings['db']['engine']     = 'mysql';
 $settings['db']['hostname']   = 'localhost';
-$settings['db']['username']   = 'myTFHUser';
+$settings['db']['username']   = 'myTFHAdmin';
 $settings['db']['password']   = 'p@ssw0rd';
 $settings['db']['database']   = 'myTFH';
 
@@ -14,15 +14,15 @@ $settings['opts']['title']    = 'myTFH';
 $settings['opts']['timeout']  = '3600';
 $settings['opts']['template'] = 'views/default';
 $settings['opts']['caching']  = 'views/cache';
-$settings['opts']['flogin']   = '15';
+$settings['opts']['flogin']   = '40';
 
 /* Session specific settings */
 $settings['sessions']['timeout'] = $settings['opts']['timeout'];
 $settings['sessions']['title']   = sha1($settings['opts']['title']);
 $settings['sessions']['cache']   = true;
 $settings['sessions']['cookie']  = true;
-$settings['sessions']['secure']  = true;
-$settings['sessions']['proto']   = true;
+$settings['sessions']['secure']  = false;
+$settings['sessions']['proto']   = false;
 
 /*
  * Site wide random salt (WARNING)
@@ -35,5 +35,5 @@ $settings['sessions']['proto']   = true;
  * database contents. If you change this manually you will
  * loose everything in the database. You have been warned.
  */
-$settings['sessions']['db-key']   = 'ce3ec4161d9b448158c9cfbd5a36d9f20dacbbf3fd38420213ef82ed131b8a6346c039f53214bf0981e6e8faf98e3aa7843a7f0594dd7e34ab5a1fa1e62ebb2549a9cdea172691f1d91a65cae1f3519b1066aec746b75ebb31e40147cc8e4b27121160433361d95aff92b82b03d5b846559497e116fc7252bdb49fba47b23b16bdafac127b772c53e121b19d633b64ca1a625e13fe5a4f7046b6683b7b905836d349a8fe4fe26bcad872da79e0c41e2a29c8d42993cb4ae29b604f8bf100348feccd3806d6e89b74eaabd165c3299bb0116d27bd571d892549e653b02232d44d67d8856fe9f75eaf33d7a158893aab2e6649ff4c082cb7df5c7ff5df597907b2';
+$settings['sessions']['db-key']   = '79ea5cee4cd3a4f6bb3642cda3d59bcf4ccf18969d2f56ed2d5182b4413e4cb9586555fa06dc30f87f13641d4a7a47ab2d736a35018e2655f1a9e23ac631404840c1369372ab41a9e697cb6e9a9a56787e82370846f84d8b313b0c2dc38d618815f6e31d5ef02ffcc059d366c6124bcdfafc7479479c8bb66720e6b09d0b3ec3078ee4d617a06b0ec498459e692c716b1db218a2218619d411abfcac2bc101369f696e44781119d64648b40b53a98e47c8dcf38bee6b2378e3218b50191edf7d548254ca8167598adbee034ad327cc51c014a4a122e362e1b55b477075127fcf2bf8fcaf8ab01782745bc2c0d474a828cb2f53f0547293996543dedf4d128927';
 ?>

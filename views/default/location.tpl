@@ -1,67 +1,71 @@
 <!-- location template state -->
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script>
+/* initialize defaults for the map */
 function initialize() {
- var myOptions = {
-  zoom: 3,
-  center: new google.maps.LatLng({$latitude},{$longitude}),
-  mapTypeId: google.maps.MapTypeId.HYBRID
- }
- var map = new google.maps.Map(document.getElementById('map'), myOptions);
- var marker = new google.maps.Marker({
-  position: new google.maps.LatLng({$latitude},{$longitude}),
-  map: map,
-  title:"User location",
-  draggable: true
- });
- var geocoder = new google.maps.Geocoder();
- function geocodePosition(pos) {
-  geocoder.geocode({
-   latLng: pos
-  }, function(responses) {
-   if (responses && responses.length > 0) {
-    map.setCenter(responses[0].geometry.location);
-    updateMarkerAddress(responses[0].formatted_address);
-    var x = responses[0].formatted_address.split(', ');
-    document.getElementById('localityName').value = x[1];
-    var y = x[2].split(' ');
-    document.getElementById('stateOrProvinceName').value = y[0];
-    document.getElementById('countryName').value = x[3];
-   } else {
-    updateMarkerAddress('Cannot determine address at this location.');
-   }
-  });
- }
- function updateMarkerStatus(str) {
-  document.getElementById('markerStatus').innerHTML = str;
- }
- function updateMarkerPosition(latLng) {
-  document.getElementById('info').innerHTML = [
-   latLng.lat(),
-   latLng.lng()
-  ].join(', ');
- }
- function updateMarkerAddress(str) {
-  document.getElementById('address').innerHTML = str;
- }
- google.maps.event.addListener(marker, 'dragstart', function() {
-  updateMarkerAddress('Dragging...');
- });
- google.maps.event.addListener(marker, 'drag', function() {
-  updateMarkerStatus('Dragging...');
-  updateMarkerPosition(marker.getPosition());
- });
- google.maps.event.addListener(marker, 'dragend', function() {
-  updateMarkerStatus('Drag ended');
-  geocodePosition(marker.getPosition());
- });
+    var mapOptions = {
+        zoom: 3,
+        center: new google.maps.LatLng({$latitude},{$longitude}),
+        mapTypeId: google.maps.MapTypeId.HYBRID,
+        mapTypeControl: false,
+        streetViewControl: false,
+        panControl: false,
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.LEFT_BOTTOM
+        }
+    }
+    /* display the map */
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	var marker = new google.maps.Marker({
+		position: new google.maps.LatLng({$latitude},{$longitude}),
+		map: map,
+		title:"User location",
+		draggable: true
+	});
+	var geocoder = new google.maps.Geocoder();
+		function geocodePosition(pos) {
+			geocoder.geocode({
+			latLng: pos
+		}, function(responses) {
+			if (responses && responses.length > 0) {
+				map.setCenter(responses[0].geometry.location);
+				updateMarkerAddress(responses[0].formatted_address);
+				var x = responses[0].formatted_address.split(', ');
+				document.getElementById('localityName').value = x[1];
+				var y = x[2].split(' ');
+				document.getElementById('stateOrProvinceName').value = y[0];
+				document.getElementById('countryName').value = x[3];
+			} else {
+				updateMarkerAddress('Cannot determine address at this location.');
+			}
+		});
+	}
+	function updateMarkerStatus(str) {
+		document.getElementById('markerStatus').innerHTML = str;
+	}
+	function updateMarkerPosition(latLng) {
+		document.getElementById('info').innerHTML = [
+			latLng.lat(),
+			latLng.lng()
+		].join(', ');
+	}
+	function updateMarkerAddress(str) {
+		document.getElementById('address').innerHTML = str;
+	}
+	google.maps.event.addListener(marker, 'dragstart', function() {
+		updateMarkerAddress('Dragging...');
+	});
+	google.maps.event.addListener(marker, 'drag', function() {
+		updateMarkerStatus('Dragging...');
+		updateMarkerPosition(marker.getPosition());
+	});
+	google.maps.event.addListener(marker, 'dragend', function() {
+		updateMarkerStatus('Drag ended');
+		geocodePosition(marker.getPosition());
+	});
 }
-function loadScript() {
- var script = document.createElement("script");
- script.type = "text/javascript";
- script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDnhBqXMD17Y5OS_Li5zwyLIAL2HuGyRoc&sensor=false&callback=initialize";
- document.body.appendChild(script);
-}
-window.onload = loadScript;
+google.maps.event.addDomListener(window, 'load', initialize);
+
 $(function () {
  var msie6 = $.browser == 'msie' && $.browser.version < 7;
  if (!msie6) {
@@ -74,7 +78,7 @@ $(function () {
     $('#float').removeClass('fixed');
    }
   });
- }  
+ }
 });
 </script>
 <div id="floatWrapper">
