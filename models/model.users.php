@@ -136,7 +136,8 @@ class users
 		}
 
 		/* because we want a strong password per account create blowfish hash & salt it with site wide key */
-		$keys['pwd'] = hashes::init($this->registry)->_do($details['password'], $this->registry->opts['dbKey']);
+		//$keys['pwd'] = hashes::init($this->registry)->_do($details['password'], $this->registry->opts['dbKey']);
+		$keys['pwd'] = hashes::init($this->registry)->_do($details['password'], hashes::init($this->registry)->_do($this->registry->opts['dbKey']));
 
 		$keys['pri'] = $this->registry->keyring->ssl->genPriv($keys['pwd']);
 		$keys['pub'] = $this->registry->keyring->ssl->genPub();
