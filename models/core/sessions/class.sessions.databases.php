@@ -246,10 +246,16 @@ class dbSession
 	public function regen($flag=false)
 	{
 		if ($flag!==false){
-			$_SESSION['id'] = session_id();
+			$_SESSION[$this->registry->libs->_getRealIPv4()]['id'] = session_id();
 			session_regenerate_id($flag);
 			$this->id = session_id();
-			$this->destroy($_SESSION['id']);
+			try{
+				$sql = sprintf('UPDATE `sessions` SET `session_id` = "%s" WHERE `session_id` = "%s"', $this->id, $_SESSION[$this->registry->libs->_getRealIPv4()]['id']);
+				$r = $this->dbconn->query($sql);
+			} catch(Exception $e) {
+				return $e;
+			}
+			$this->destroy($_SESSION[$this->registry->libs->_getRealIPv4()]['id']);
 		}
 		return;
 	}
@@ -271,7 +277,7 @@ class dbSession
 	 */
 	private function _path()
 	{
-		return ($_SERVER['HTTP_HOST'] == $_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'] : $_SERVER['HTTP_REFERER'];
+		return '/';//return ($_SERVER['HTTP_HOST'] == $_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'] : $_SERVER['HTTP_REFERER'];
 	}
 
 	/**
@@ -280,7 +286,7 @@ class dbSession
 	 */
 	private function _domain()
 	{
-		return ($_SERVER['HTTP_HOST'] == $_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_HOST'] : $_SERVER['HTTP_REFERER'];
+		return 'sso.scl.utah.edu';//return ($_SERVER['HTTP_HOST'] == $_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_HOST'] : $_SERVER['HTTP_REFERER'];
 	}
 
 	/**

@@ -56,8 +56,7 @@ class keyring
 	/**
 	 *! @var config array - OpenSSL configuration settings
 	 */
-	private $config = array('config'				=> 'config/openssl.cnf',
-							'encrypt_key'			=> true,
+	private $config = array('encrypt_key'			=> true,
 							'private_key_type'		=> OPENSSL_KEYTYPE_RSA,
 							'digest_algorithm'		=> 'sha512',
 							'private_key_bits'		=> 2048,
@@ -73,7 +72,7 @@ class keyring
 						'organizationName'        => 'University Of Utah',
 						'organizationalUnitName'  => 'Marriott Library',
 						'commonName'              => 'localhost:8080',
-						'emailAddress'            => 'licensing@utah.edu');
+						'emailAddress'            => 'sso@utah.edu');
 
 	/**
 	 *! @function __construct

@@ -1,6 +1,6 @@
 <?php
 
-//error_reporting(0);
+error_reporting(E_ERROR);
 
 /* define application path */
 define('__SITE', realpath(dirname(__FILE__)));

@@ -21,8 +21,8 @@ $settings['sessions']['timeout'] = $settings['opts']['timeout'];
 $settings['sessions']['title']   = sha1($settings['opts']['title']);
 $settings['sessions']['cache']   = true;
 $settings['sessions']['cookie']  = true;
-$settings['sessions']['secure']  = false;
-$settings['sessions']['proto']   = false;
+$settings['sessions']['secure']  = true;
+$settings['sessions']['proto']   = true;
 
 /*
  * Site wide random salt (WARNING)
@@ -35,5 +35,5 @@ $settings['sessions']['proto']   = false;
  * database contents. If you change this manually you will
  * loose everything in the database. You have been warned.
  */
-$settings['sessions']['db-key']   = '79ea5cee4cd3a4f6bb3642cda3d59bcf4ccf18969d2f56ed2d5182b4413e4cb9586555fa06dc30f87f13641d4a7a47ab2d736a35018e2655f1a9e23ac631404840c1369372ab41a9e697cb6e9a9a56787e82370846f84d8b313b0c2dc38d618815f6e31d5ef02ffcc059d366c6124bcdfafc7479479c8bb66720e6b09d0b3ec3078ee4d617a06b0ec498459e692c716b1db218a2218619d411abfcac2bc101369f696e44781119d64648b40b53a98e47c8dcf38bee6b2378e3218b50191edf7d548254ca8167598adbee034ad327cc51c014a4a122e362e1b55b477075127fcf2bf8fcaf8ab01782745bc2c0d474a828cb2f53f0547293996543dedf4d128927';
+$settings['sessions']['db-key']   = '4b8568b15336f64a71edaf9be264ac81d832ba40915a18aa9e7ef5283d601f18f52e9575995797b7c64c4228adb7bd7becb54cfaadb77faeab6cd110d3164eda5067530405fd5fffe302c847f4892bdb1463f55f0fe34a569f14cc6f9074a8ba59e65870f1da218eebd005e82709bf991e5b6cbccfbfb1d9e889969ab0b04a991aa58444d1c7a3156623724ff77278e18f313c026a62f66c4fabe2e83757404d1ec6a3ef66e6a8cbee1a2b8b6117719b865bc4da3087e0aba907b57e61addbcc2f84a4a1e2ec784f1f0a857b7823124fdec83c43c6616593b8eb9c5eb4c745bbf799c1731967b4c44cb01bba4db0b710a9acbc706cb6cba3576e0c619d3a4ade';
 ?>

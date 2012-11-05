@@ -63,7 +63,11 @@ class authentication
 	{
 		$this->registry = $registry;
 		if (!$this->__setup($registry)){
-			exit(array('Error'=>'Necessary keys are missing, cannot continue'));
+			if ($_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
+				exit(array('Error'=>'Necessary keys are missing, cannot continue'));
+			} else {
+				return 'Error: Necessary keys are missing, cannot continue';
+			}
 		}
 	}
 

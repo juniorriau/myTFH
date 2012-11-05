@@ -135,11 +135,14 @@ class users
 			return array('error'=>'Password does not meet complexity requirements');
 		}
 
-		/* because we want a strong password per account blowfish hash & salt it with site wide key */
+		/* because we want a strong password per account create blowfish hash & salt it with site wide key */
 		$keys['pwd'] = hashes::init($this->registry)->_do($details['password'], $this->registry->opts['dbKey']);
 
 		$keys['pri'] = $this->registry->keyring->ssl->genPriv($keys['pwd']);
 		$keys['pub'] = $this->registry->keyring->ssl->genPub();
+		if ((empty($keys['pri'])) || (empty($keys['pub']))) {
+			return array('error'=>'An error occured generating users keyring data');
+		}
 
 		$u = $this->__doUser($details, $keys);
 		if ($u <= 0) {
@@ -177,7 +180,7 @@ class users
 						   $this->registry->db->sanitize($details['level']),
 						   $this->registry->db->sanitize($details['group']),
                            $this->registry->db->sanitize($keys['pwd']));
-            $r = $this->registry->db->query($sql);
+			$r = $this->registry->db->query($sql);
 		} catch(Exception $e) {
 			return false;
 		}
@@ -202,7 +205,7 @@ class users
 						   $this->registry->db->sanitize($keys['pri']),
 						   $this->registry->db->sanitize($keys['pub']),
 						   $this->registry->db->sanitize($keys['pwd']));
-            $r = $this->registry->db->query($sql);
+			$r = $this->registry->db->query($sql);
 		} catch(Exception $e) {
 			return false;
 		}
